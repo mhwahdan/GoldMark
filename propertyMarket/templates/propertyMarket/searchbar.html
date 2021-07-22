@@ -32,10 +32,9 @@
                                 class="inspiry_select_picker_trigger show-tick" data-selected-text-format="count > 2"
                                 data-actions-box="true" data-size="5" data-live-search="true" multiple title="All Types"
                                 data-count-selected-text="{0}  Types Selected ">
-                                <option value="commercial"> Commercial</option>
-
-                                <option value="residential"> Residential</option>
-                                <option value="compound">- Building</option>
+                                {% for type in types %}
+                                <option value="{{ type }}"> {{ type }}</option>
+                                {% endfor %}
                             </select>
                         </span>
                     </div>

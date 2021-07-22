@@ -10,7 +10,8 @@ def home(request):
         'for_rent': Property.objects.all().filter(status=False),
         'featured': Property.objects.all().filter(featured=True),
         'locations': Location.objects.all(),
-        'developers': Developer.objects.all()
+        'developers': Developer.objects.all(),
+        'types': Property.get_types()
     }
     return render(request, 'propertyMarket/home.html', context=context)
 
@@ -22,7 +23,8 @@ def view_property(request):
         'unit': Property.objects.get(pk=unit_id),
         'banks': Bank.objects.all(),
         'locations': Location.objects.all(),
-        'developers': Developer.objects.all()
+        'developers': Developer.objects.all(),
+        'types': Property.get_types()
     }
     return render(request, 'propertyMarket/viewproperty.html', context=context)
 
@@ -33,7 +35,11 @@ def process_message(request):
 
 def search_properties(requests):
     if len(requests.GET) == 0:
-        return render(requests, 'propertyMarket/searchresults.html', context={'has_result': False})
+        return render(requests, 'propertyMarket/searchresults.html', context={
+            'locations': Location.objects.all(),
+            'developers': Developer.objects.all(),
+            'types': Property.get_types(),
+            'has_result': False})
     result = Location.objects.all()
     indexes = requests.GET
     if 'location' in indexes.keys():
@@ -61,6 +67,7 @@ def search_properties(requests):
         'results': properties,
         'locations': Location.objects.all(),
         'developers': Developer.objects.all(),
+        'types': Property.get_types(),
         'has_result': True
     }
     return render(requests, 'propertyMarket/searchresults.html', context=context)

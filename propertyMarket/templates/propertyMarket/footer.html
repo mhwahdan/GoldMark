@@ -62,24 +62,11 @@
 					<section id="property_types_widget-2" class="widget clearfix Property_Types_Widget">
 						<h3 class="title">Property Types</h3>
 						<ul>
+                            {% for type in types %}
 							<li>
-								<a href="./property-type/commercial/index.html">Commercial</a>
-								<ul class="children">
-									<li><a href="./property-type/office/index.html">Office</a></li>
-									<li><a href="./property-type/shop/index.html">Shop</a></li>
-								</ul>
+                                <a href="{% url 'search_property' %}?type={{ type }}">{{ type }}</a>
 							</li>
-							<li>
-								<a href="./property-type/residential/index.html">Residential</a>
-								<ul class="children">
-									<li><a href="./property-type/apartment/index.html">Apartment</a></li>
-									<li><a href="./property-type/apartment-building/index.html">Apartment
-											Building</a></li>
-									<li><a href="./property-type/single-family/index.html">Single Family</a>
-									</li>
-									<li><a href="./property-type/villa/index.html">Villa</a></li>
-								</ul>
-							</li>
+                            {% endfor %}
 						</ul>
 					</section>
 				</div>

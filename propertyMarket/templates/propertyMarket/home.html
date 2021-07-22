@@ -432,9 +432,7 @@
 																											</path>
 																										</svg>
 																										<span>
-																											{{
-																											appartment.get_images|length
-																											}} </span>
+																											{{ appartment.get_images|length }} </span>
 																									</div>
 																									<div class="rhea_media rhea_media_video"
 																										data-fancybox-trigger="video-bf625a4-101"
@@ -459,17 +457,14 @@
 																								</div>
 																								<div class="rhea_property_images_load"
 																									style="display: none">
-																									{% for image in
-																									appartment.get_images
-																									%}
+																									{% for image in appartment.get_image %}
 																									<span
 																										style="display: none;"
 																										data-fancybox="gallery-bf625a4-101"
 																										data-src="{{ image.url }}"
 																										data-thumb="{{ image.url }}"></span>
 																									{% endfor %}
-																									{% if
-																									appartment.video %}
+																									{% if appartment.video %}
 																									<span
 																										style="display: none;"
 																										data-fancybox="video-bf625a4-101"
@@ -582,15 +577,13 @@
 																						<h3>
 																							<a
 																								href="{% url 'properties' %}?id={{ appartment.id }}&type={{ appartment.get_type }}">
-																								{{ appartment.name
-																								}}</a>
+																								{{ appartment.name }}</a>
 																						</h3>
 
 
 																						<p
 																							class="rh_prop_card__excerpt">
-																							{{ appartment.description
-																							}}&hellip;</p>
+																							{{ appartment.description }}&hellip;</p>
 
 																						<div class="rhea_address_sty">
 																							<a class="rhea_trigger_map rhea_facnybox_trigger-178478a "
@@ -645,9 +638,7 @@
 																											</path>
 																										</svg>
 																										<span
-																											class="figure">{{
-																											appartment.bedrooms
-																											}}</span>
+																											class="figure">{{ appartment.bedrooms }}</span>
 																									</div>
 																								</div>
 																								<div
@@ -667,9 +658,7 @@
 																											</path>
 																										</svg>
 																										<span
-																											class="figure">{{
-																											appartment.bathrooms
-																											}}</span>
+																											class="figure">{{ appartment.bathrooms }}</span>
 																									</div>
 																								</div>
 																								<div
@@ -726,9 +715,7 @@
             c1.104,0,2-0.896,2-2C24,21.262,23.596,20.624,23,20.277z"></path>
 																										</svg>
 																										<span
-																											class="figure">{{
-																											appartment.area
-																											}}</span>
+																											class="figure">{{ appartment.area }}</span>
 																										<span
 																											class="label">sq
 																											ft</span>
@@ -745,12 +732,10 @@
 																								class="rhea_property_price_box">
 																								<span
 																									class="rh_prop_card__status">
-																									{{ appartment.type
-																									}}</span>
+																									{{ appartment.type }}</span>
 																								<p
 																									class="rh_prop_card__price">
-																									{{ appartment.price
-																									}} EGP
+																									{{ appartment.price }} EGP
 																								</p>
 
 																							</div>
@@ -901,9 +886,7 @@
 																								d="M3 5h12c1.1 0 2 0.9 2 2v8c0 1.1-0.9 2-2 2H3c-1.1 0-2-0.9-2-2V7C1 5.9 1.9 5 3 5zM7.7 1h2.8c0.8-0.2 1.7 0.4 1.8 1.2 0 0 0 0.1 0 0.1L13 5H5l0.7-2.7C5.9 1.4 6.8 0.8 7.7 1zM9 7.4c2.2 0 4 1.8 4 4s-1.8 4-4 4 -4-1.8-4-4S6.8 7.4 9 7.4zM9 9c1.3 0 2.4 1.1 2.4 2.4s-1.1 2.4-2.4 2.4 -2.4-1.1-2.4-2.4S7.7 9 9 9L9 9zM8.2 2.6h1.6c0.4 0 0.8 0.4 0.7 0.9 0 0.4-0.3 0.7-0.7 0.7H8.2c-0.4 0-0.8-0.3-0.9-0.7 0-0.4 0.3-0.8 0.7-0.9C8.1 2.6 8.2 2.6 8.2 2.6z">
 																							</path>
 																						</svg> <span>
-																							{{
-																							appartment.residentialpropertyimage_set.all|length
-																							}} </span>
+																							{{ appartment.residentialpropertyimage_set.all|length }} </span>
 																					</div>
 																					<div class="rhea_media rhea_media_video"
 																						data-fancybox-trigger="video-178478a-98"
@@ -925,9 +908,7 @@
 																				</div>
 																				<div class="rhea_property_images_load"
 																					style="display: none">
-																					{% for image in
-																					appartment.residentialpropertyimage_set.all
-																					%}
+																					{% for image in appartment.residentialpropertyimage_set.all %}
 																					<span style="display: none;"
 																						data-fancybox="gallery-178478a-98"
 																						data-src="{{ image.image.url }}"
@@ -1307,8 +1288,7 @@ c1.104,0,2-0.896,2-2C24,21.262,23.596,20.624,23,20.277z"></path>
 																					href="{% url 'properties' %}?id={{ property.id }}"></a>
 																				<div class="rhea_fp_slide_info_inner">
 																					<h3 class="rhea_fp2_title"><a
-																							href="{% url 'properties' %}?id={{ property.id }}">{{
-																							property.name }}</a></h3>
+																							href="{% url 'properties' %}?id={{ property.id }}">{{ property.name }}</a></h3>
 																					<address class="rhea_fp_address">
 																						<a class="rhea_trigger_map rhea_facnybox_trigger-6294891 "
 																							data-rhea-map-source="rhea-map-source-6294891"
@@ -1334,8 +1314,7 @@ c1.104,0,2-0.896,2-2C24,21.262,23.596,20.624,23,20.277z"></path>
 																								</svg></span>
 																							<span
 																								class="rhea_address_text">
-																								{{ property.address
-																								}}</span>
+																								{{ property.address }}</span>
 																						</a>
 																					</address>
 																					<div class="rhea_added_sty">
@@ -1388,9 +1367,7 @@ c1.104,0,2-0.896,2-2C24,21.262,23.596,20.624,23,20.277z"></path>
 																										</path>
 																									</svg>
 																									<span
-																										class="figure">{{
-																										property.bathrooms
-																										}}</span>
+																										class="figure">{{ property.bathrooms }}</span>
 																								</div>
 																							</div>
 																							<div
@@ -1446,9 +1423,7 @@ c1.104,0,2-0.896,2-2C24,21.262,23.596,20.624,23,20.277z"></path>
 c1.104,0,2-0.896,2-2C24,21.262,23.596,20.624,23,20.277z"></path>
 																									</svg>
 																									<span
-																										class="figure">{{
-																										property.area
-																										}}</span>
+																										class="figure">{{ property.area }}</span>
 																									<span
 																										class="label">sq
 																										ft</span>
@@ -1461,8 +1436,7 @@ c1.104,0,2-0.896,2-2C24,21.262,23.596,20.624,23,20.277z"></path>
 
 																					</div>
 																					<p class="rhea_fp_excerpt">
-																						{{ property.description
-																						}}&hellip;</p>
+																						{{ property.description }}&hellip;</p>
 
 
 																					<div class="rhea_fp_sales_icons">

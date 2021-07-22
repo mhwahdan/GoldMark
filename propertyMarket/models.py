@@ -67,8 +67,7 @@ class Property(models.Model):
     image = models.ImageField(upload_to='propertyMarket/images/properties/residential/profiles',
                               verbose_name='profile image')
     garage = models.IntegerField(verbose_name='number of garage places', null=True, blank=True)
-    type = models.CharField(max_length=100, verbose_name='Property Type',
-                            choices={
+    propertyTypes = {
                                 ("town house", "town house"),
                                 ("apartment", "apartment"),
                                 ("villa", "villa"),
@@ -83,7 +82,9 @@ class Property(models.Model):
                                 ("retail", "retail"),
                                 ("Industrial", "Industrial"),
                                 ("clinic", "clinic")
-                            })
+                            }
+    type = models.CharField(max_length=100, verbose_name='Property Type',
+                            choices=propertyTypes)
     parent = models.ForeignKey('self', on_delete=models.SET_NULL, blank=True, null=True,
                                verbose_name='Property it belongs to')
 
@@ -98,6 +99,10 @@ class Property(models.Model):
 
     def has_developer(self):
         return self.Developer is not None
+
+    @staticmethod
+    def get_types():
+        return list(map(lambda x: x[0], Property.propertyTypes))
 
 
 class PropertyImage(models.Model):

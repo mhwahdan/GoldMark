@@ -107,15 +107,7 @@
 													d="M3 5h12c1.1 0 2 0.9 2 2v8c0 1.1-0.9 2-2 2H3c-1.1 0-2-0.9-2-2V7C1 5.9 1.9 5 3 5zM7.7 1h2.8c0.8-0.2 1.7 0.4 1.8 1.2 0 0 0 0.1 0 0.1L13 5H5l0.7-2.7C5.9 1.4 6.8 0.8 7.7 1zM9 7.4c2.2 0 4 1.8 4 4s-1.8 4-4 4 -4-1.8-4-4S6.8 7.4 9 7.4zM9 9c1.3 0 2.4 1.1 2.4 2.4s-1.1 2.4-2.4 2.4 -2.4-1.1-2.4-2.4S7.7 9 9 9L9 9zM8.2 2.6h1.6c0.4 0 0.8 0.4 0.7 0.9 0 0.4-0.3 0.7-0.7 0.7H8.2c-0.4 0-0.8-0.3-0.9-0.7 0-0.4 0.3-0.8 0.7-0.9C8.1 2.6 8.2 2.6 8.2 2.6z">
 												</path>
 											</svg> <span>
-												{% if result.get_type == 'Residential' %}
-												{{ result.residentialpropertyimage_set.all|length }}
-												{% elif result.get_type == 'Commercial' %}
-												{{ result.commercialpropertyimage_set.all|length }}
-												{% elif result.get_type == 'Compound' %}
-												{{ result.compoundpropertyimage_set.all|length }}
-												{% else %}
-												error
-												{% endif %}
+												{{ result.get_images|length }}
 											</span>
 										</div>
 										<div class="rh_media rh_media_video" data-fancybox-trigger="video-45"
@@ -137,27 +129,19 @@
 									</div>
 									<div class="rh_property_images_load" style="display: none">
 										</span>
-										{% if result.get_type == 'Residential' %}
-										{% for image in result.residentialpropertyimage_set.all %}
+										{% for image in result.get_images %}
 										<span style="display: none;" data-fancybox="gallery-45"
-											data-src="{{ image.image.url }}" data-thumb="{{ image.image.url }}"></span>
+											data-src="{{ image.url }}" data-thumb="{{ image.url }}"></span>
 										{% endfor %}
-										{% elif result.get_type == 'Commercial' %}
-										{% for image in result.commercialpropertyimage_set.all %}
-										<span style="display: none;" data-fancybox="gallery-45"
-											data-src="{{ image.image.url }}" data-thumb="{{ image.image.url }}"></span>
-										{% endfor %}
-										{% elif result.get_type == 'Compound' %}
-										{% for image in result.compoundpropertyimage_set.all %}
-										<span style="display: none;" data-fancybox="gallery-45"
-											data-src="{{ image.image.url }}" data-thumb="{{ image.image.url }}"></span>
-										{% endfor %}
-										{% else %}
-										error
-										{% endif %}
-
 										<span style="display: none;" data-fancybox="video-45"
-											data-src="{{ result.video.url }}"></span>
+                                              {% if result.video %}
+											data-src="{{ result.video.url }}"
+                                            {% else %}
+                                                data-src="#"
+                                              {% endif %}
+                                        >
+
+                                        </span>
 									</div>
 
 
@@ -186,15 +170,7 @@
 								</div>
 								<div class="rh_bottom_tags_box">
 									<span class="rh_stylish_property_types">
-										{% if result.get_type == 'Residential' %}
-										Residential property
-										{% elif result.get_type == 'Commercial' %}
-										Commercial property
-										{% elif result.get_type == 'Compound' %}
-										Compound property
-										{% else %}
-										error
-										{% endif %}
+										{{ result.type }}
 									</span>
 									<div class="rh_soi_prop_status_sty">
 										<span class="rh_prop_status_sty" style="">
@@ -209,41 +185,23 @@
 								</div>
 
 								<a class="rh_permalink rh_scale_animation"
-									href="{% url 'properties' %}?id={{ result.id }}&type={{ result.get_type }}">
-									{% if result.get_type == 'Residential' %}
-									<img width="680" height="395"
-										src="{{ result.residentialpropertyimage_set.all.0.image.url }}"
+									href="{% url 'properties' %}?id={{ result.id }}&type={{ result.type }}">
+									<img
+										src="{{ result.image.url }}"
 										class="attachment-modern-property-child-slider size-modern-property-child-slider wp-post-image"
 										alt="House" loading="lazy"></a>
 							</div>
 
-							{% elif result.get_type == 'Commercial' %}
-							<img width="680" height="395" src="{{ result.commercialpropertyimage_set.all.0.image.url }}"
-								class="attachment-modern-property-child-slider size-modern-property-child-slider wp-post-image"
-								alt="House" loading="lazy"></a>
-						</div>
-
-						{% elif result.get_type == 'Compound' %}
-						<img width="680" height="395" src="{{ result.compoundpropertyimage_set.all.0.image.url }}"
-							class="attachment-modern-property-child-slider size-modern-property-child-slider wp-post-image"
-							alt="House" loading="lazy"></a>
-				</div>
-
-				{% else %}
-				error
-				{% endif %}
-
 				<div class="rh_detail_wrapper rh_detail_wrapper_2">
 
 					<h3 class="rh_heading_stylish"><a
-							href="{% url 'properties' %}?id={{ result.id }}&type={{ result.get_type }}">{{ result.name
-							}}</a></h3>
+							href="{% url 'properties' %}?id={{ result.id }}&type={{ result.type }}">{{ result.name }}</a></h3>
 					<div class="rh_address_sty">
 						<a class="rhea_trigger_map rhea_facnybox_trigger- " data-rhea-map-source="rhea-map-source-"
 							data-rhea-map-location="25.749806376111,-80.25448590517,13"
 							data-rhea-map-title="{{ result.name }}" data-rhea-map-price=" ${{ result.price }} "
-							data-rhea-map-thumb="{{ result.residential.residentialpropertyimage_set.all.0.image.url }}"
-							href="{% url 'properties' %}?id={{ result.id }}&type={{ result.get_type }}">
+							data-rhea-map-thumb="{{ result.image.url }}"
+							href="{% url 'properties' %}?id={{ result.id }}&type={{ result.type }}">
 							<span class="rh_address_pin test">
 								<svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 18 18">
 									<style type="text/css">
