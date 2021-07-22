@@ -47,12 +47,12 @@
                         <span class="rh_prop_search__selectwrap">
                             <select name="location"
                                 class="inspiry_multi_select_picker_location inspiry_select_picker_trigger show-tick"
-                                data-size="5" multiple
-                                data-count-selected-text="{0}  Locations Selected " title="All Locations">
+                                data-size="5" multiple data-count-selected-text="{0}  Locations Selected "
+                                title="All Locations">
                                 {% for location in locations %}
                                 <option value="{{ location.name }}">{{ location.name }}</option>
 
-                            {% endfor %}
+                                {% endfor %}
                             </select>
 
                         </span>
@@ -263,19 +263,21 @@
                         <input type="text" autocomplete="off" name="max-area" id="max-area" pattern="[0-9]+" value=""
                             placeholder="Any" title="Only provide digits!">
                     </div>
-                    <div class="rh_prop_search__option rh_prop_search__select rh_garages_field_wrapper inspiry_select_picker_field">
-                    <label for="developer-select">
+                    <div
+                        class="rh_prop_search__option rh_prop_search__select rh_garages_field_wrapper inspiry_select_picker_field">
+                        <label for="developer-select">
                             <span class="label">
                                 Developer </span>
                         </label>
                         <span class="rh_prop_search__selectwrap">
-                        <select id="developer-select" class="inspiry_select_picker_trigger show-tick" name="developer"data-selected-text-format="count > 2"
-                                data-actions-box="true" data-size="5" data-live-search="true" multiple title="None selected"
+                            <select id="developer-select" class="inspiry_select_picker_trigger show-tick"
+                                name="developer" data-selected-text-format="count > 2" data-actions-box="true"
+                                data-size="5" data-live-search="true" multiple title="None selected"
                                 data-count-selected-text="{0}  developers Selected ">
-                            {% for developer in developers %}
+                                {% for developer in developers %}
                                 <option value="{{ developer.id }}">{{ developer.name }}</option>
-                            {% endfor %}
-                        </select>
+                                {% endfor %}
+                            </select>
                         </span>
                     </div>
                 </div>

@@ -19,6 +19,7 @@ class Developer(models.Model):
     phone = models.CharField(max_length=20, verbose_name='Agency phone number')
     image = models.ImageField(upload_to='propertyMarket/images/Agencies/profiles/', verbose_name='Agency logo',
                               blank=True, null=True)
+    website = models.URLField(verbose_name='Developer website')
 
     def __str__(self):
         return self.name
@@ -94,6 +95,9 @@ class Property(models.Model):
 
     def get_images(self):
         return list(map(lambda x: x.image, self.propertyimage_set.all()))
+
+    def has_developer(self):
+        return self.Developer is not None
 
 
 class PropertyImage(models.Model):

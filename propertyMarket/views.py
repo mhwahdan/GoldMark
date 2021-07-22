@@ -32,6 +32,8 @@ def process_message(request):
 
 
 def search_properties(requests):
+    if len(requests.GET) == 0:
+        return render(requests, 'propertyMarket/searchresults.html', context={'has_result': False})
     result = Location.objects.all()
     indexes = requests.GET
     if 'location' in indexes.keys():
@@ -58,7 +60,8 @@ def search_properties(requests):
     context = {
         'results': properties,
         'locations': Location.objects.all(),
-        'developers': Developer.objects.all()
+        'developers': Developer.objects.all(),
+        'has_result': True
     }
     return render(requests, 'propertyMarket/searchresults.html', context=context)
 
