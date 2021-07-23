@@ -104,6 +104,10 @@ class Property(models.Model):
     def get_types():
         return list(map(lambda x: x[0], Property.propertyTypes))
 
+    def inner_properties(self):
+        if not self.is_compound():
+            return {}
+        return self.property_set.all()
 
 class PropertyImage(models.Model):
     image = models.ImageField(upload_to='GoldMark/images/properties/residential/', verbose_name='Image location')
