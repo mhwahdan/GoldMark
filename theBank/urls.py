@@ -21,7 +21,7 @@ from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('propertyMarket.urls'))
+    path('', include('GoldMark.urls'))
 ]
 
 if settings.DEBUG:
