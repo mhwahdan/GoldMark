@@ -81,6 +81,22 @@
 							</li>
                         {% endfor %}
                         						</ul>
+                    						<ul style="list-style-type: none;overflow: hidden;">
+
+                                            {% for type in types|slice:"9:12" %}
+							<li style="float: left;padding-left: 3%;">
+                                <a href="{% url 'search_property' %}?type={{ type }}">{{ type }}</a>
+							</li>
+                        {% endfor %}
+                        						</ul>
+                                        						<ul style="list-style-type: none;overflow: hidden;">
+
+                                            {% for type in types|slice:"12:15" %}
+							<li style="float: left;padding-left: 3%;">
+                                <a href="{% url 'search_property' %}?type={{ type }}">{{ type }}</a>
+							</li>
+                        {% endfor %}
+                        						</ul>
 					</section>
 				</div>
 				<!-- /.rh_widgets -->
