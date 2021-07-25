@@ -19,12 +19,18 @@ def home(request):
 def view_property(request):
     unit_id = int(request.GET['id'])
     unit = Property.objects.get(pk=unit_id)
+    similar = Property.objects.all().exclude(pk=unit_id)\
+        .filter(location=unit.location)\
+        .filter(type=unit.type)\
+        .filter(status=unit.status)\
+        .order_by('featured')[0:5]
     context = {
         'unit': Property.objects.get(pk=unit_id),
         'banks': Bank.objects.all(),
         'locations': Location.objects.all(),
         'developers': Developer.objects.all(),
-        'types': Property.get_types()
+        'types': Property.get_types(),
+        'similar': similar
     }
     return render(request, 'GoldMark/viewproperty.html', context=context)
 

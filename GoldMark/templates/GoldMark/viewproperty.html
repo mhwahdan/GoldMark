@@ -518,7 +518,7 @@
 															</div>
 															<!-- /.rh_prop_card__meta -->
                                                         {% endif %}
-															<div class="rh_prop_card__meta">
+                                                            <div class="rh_prop_card__meta">
 																<span class="rh_meta_titles">
 																	Area </span>
 																<div>
@@ -605,7 +605,7 @@
                                         data-similar-properties-filter="property-agent">Property Agent</a>
                                 </div>
                                 <div id="similar-properties" class="rh_property__container rh_similar_properties_box">
-
+{% for unit in similar %}
                                     <article class="rh_prop_card rh_prop_card--listing">
 
                                         <div class="rh_prop_card__wrap">
@@ -613,67 +613,21 @@
 
                                             <figure class="rh_prop_card__thumbnail">
                                                 <div class="rh_figure_property_one">
-                                                    <a href="./../apartments-building-having-15-apartments/index.html">
+                                                    <a href="{% url 'properties' %}?id={{ unit.id }}">
                                                         <img width="680" height="395"
-                                                            src="./../../wp-content/uploads/2017/06/apartment-00.jpg"
+                                                            src="{{ unit.image.url }}"
                                                             class="attachment-modern-property-child-slider size-modern-property-child-slider wp-post-image"
                                                             alt="" loading="lazy"> </a>
 
                                                     <div class="rh_overlay"></div>
                                                     <div class="rh_overlay__contents rh_overlay__fadeIn-bottom">
                                                         <a
-                                                            href="./../apartments-building-having-15-apartments/index.html">View
+                                                            href="{% url 'properties' %}?id={{ unit.id }}">View
                                                             Property</a>
                                                     </div>
                                                     <!-- /.rh_overlay__contents -->
 
                                                 </div>
-                                                <div class="rh_prop_card__btns">
-                                                    <span class="favorite-btn-wrap favorite-btn-35">
-                                                        <span
-                                                            class="favorite-placeholder highlight__red hide user_not_logged_in"
-                                                            data-propertyid="35" data-tooltip="Added to favorites">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24"
-                                                                height="24" viewbox="0 0 24 21">
-                                                                <path class="rh_svg"
-                                                                    d="M1089.48,1923.98a6.746,6.746,0,0,1,9.54,9.54L1089,1943l-10.02-9.48a6.746,6.746,0,0,1,9.54-9.54A0.641,0.641,0,0,0,1089.48,1923.98Z"
-                                                                    transform="translate(-1077 -1922)"></path>
-                                                            </svg> </span>
-                                                        <a href="#" class="favorite add-to-favorite user_not_logged_in"
-                                                            data-tooltip="Add to favorites" data-propertyid="35">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24"
-                                                                height="24" viewbox="0 0 24 21">
-                                                                <path class="rh_svg"
-                                                                    d="M1089.48,1923.98a6.746,6.746,0,0,1,9.54,9.54L1089,1943l-10.02-9.48a6.746,6.746,0,0,1,9.54-9.54A0.641,0.641,0,0,0,1089.48,1923.98Z"
-                                                                    transform="translate(-1077 -1922)"></path>
-                                                            </svg> </a>
-                                                    </span>
-                                                    <span class="add-to-compare-span compare-btn-35"
-                                                        data-property-id="35"
-                                                        data-property-title="Building Having 15 Apartments"
-                                                        data-property-url="./property/apartments-building-having-15-apartments/"
-                                                        data-property-image="../../static/wp-content/uploads/2017/06/apartment-00.jpg">
-                                                        <span class="compare-placeholder highlight hide"
-                                                            data-tooltip="Added to compare">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24"
-                                                                height="24" viewbox="0 0 24 24">
-                                                                <path
-                                                                    d="M1144,1942l-8,1v3l-7-5,7-5v3l8,1A1,1,0,0,1,1144,1942Zm-22-14,8,1v3l7-5-7-5v3l-8,1A1,1,0,0,0,1122,1928Z"
-                                                                    transform="translate(-1121 -1922)"></path>
-                                                            </svg>
-                                                        </span>
-                                                        <a class="rh_trigger_compare add-to-compare"
-                                                            href="./../apartments-building-having-15-apartments/index.html"
-                                                            data-tooltip="Add to compare">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24"
-                                                                height="24" viewbox="0 0 24 24">
-                                                                <path
-                                                                    d="M1144,1942l-8,1v3l-7-5,7-5v3l8,1A1,1,0,0,1,1144,1942Zm-22-14,8,1v3l7-5-7-5v3l-8,1A1,1,0,0,0,1122,1928Z"
-                                                                    transform="translate(-1121 -1922)"></path>
-                                                            </svg>
-                                                        </a>
-                                                    </span>
-                                                </div>
                                                 <!-- /.rh_prop_card__btns -->
                                             </figure>
                                             <!-- /.rh_prop_card__thumbnail -->
@@ -681,16 +635,43 @@
                                             <div class="rh_prop_card__details">
 
                                                 <h3>
-                                                    <a href="./../apartments-building-having-15-apartments/index.html">Building
-                                                        Having 15 Apartments</a>
+                                                    <a href="{% url 'properties' %}?id={{ unit.id }}">{{ unit.name }}</a>
                                                 </h3>
 
-                                                <p class="rh_prop_card__excerpt">Maecenas faucibus mollis interdum.
-                                                    Aenean eu leo quam. Pellentesque ornare&hellip;</p>
+                                                <p class="rh_prop_card__excerpt">{{ unit.description }}</p>
                                                 <!-- /.rh_prop_card__excerpt -->
 
                                                 <div class="rh_prop_card__meta_wrap">
-
+                                                        {% if unit.bedrooms %}
+                                                        						<div class="rh_prop_card__meta">
+							<span class="rh_meta_titles">Bedrooms</span>
+							<div class="rh_meta_icon_wrapper">
+								<svg class="rh_svg" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+									viewbox="0 0 24 24">
+									<defs>
+									</defs>
+									<path
+										d="M1111.91,600.993h16.17a2.635,2.635,0,0,1,2.68,1.773l1.21,11.358a2.456,2.456,0,0,1-2.61,2.875h-18.73a2.46,2.46,0,0,1-2.61-2.875l1.21-11.358A2.635,2.635,0,0,1,1111.91,600.993Zm0.66-7.994h3.86c1.09,0,2.57.135,2.57,1l0.01,3.463c0.14,0.838-1.72,1.539-2.93,1.539h-4.17c-1.21,0-2.07-.7-1.92-1.539l0.37-3.139A2.146,2.146,0,0,1,1112.57,593Zm11,0h3.86a2.123,2.123,0,0,1,2.2,1.325l0.38,3.139c0.14,0.838-.72,1.539-1.93,1.539h-5.17c-1.21,0-2.07-.7-1.92-1.539L1121,594C1121,593.1,1122.48,593,1123.57,593Z"
+										transform="translate(-1108 -593)"></path>
+								</svg>
+								<span class="figure">{{ unit.bedrooms }}</span>
+							</div>
+						</div>
+						{% endif %}
+                                                        {% if unit.bathrooms %}
+                                                            <div class="rh_prop_card__meta">
+							<span class="rh_meta_titles">Bathrooms</span>
+							<div class="rh_meta_icon_wrapper">
+								<svg class="rh_svg" xmlns="http://www.w3.org/2000/svg" width="23.69" height="24"
+									viewbox="0 0 23.69 24">
+									<path
+										d="M1204,601a8,8,0,0,1,16,0v16h-2V601a6,6,0,0,0-12,0v1h-2v-1Zm7,6a6,6,0,0,0-12,0h12Zm-6,2a1,1,0,0,1,1,1v1a1,1,0,0,1-2,0v-1A1,1,0,0,1,1205,609Zm0,5a1,1,0,0,1,1,1v1a1,1,0,0,1-2,0v-1A1,1,0,0,1,1205,614Zm4.94-5.343a1,1,0,0,1,1.28.6l0.69,0.878a1,1,0,0,1-1.88.685l-0.69-.879A1,1,0,0,1,1209.94,608.657Zm2.05,4.638a1,1,0,0,1,1.28.6l0.35,0.94a1.008,1.008,0,0,1-.6,1.282,1,1,0,0,1-1.28-.6l-0.35-.939A1.008,1.008,0,0,1,1211.99,613.295Zm-11.93-4.638a1,1,0,0,1,.6,1.282l-0.69.879a1,1,0,1,1-1.87-.682l0.68-.88A1,1,0,0,1,1200.06,608.657Zm-2.05,4.639a1,1,0,0,1,.6,1.281l-0.34.941a1,1,0,0,1-1.88-.683l0.34-.94A1,1,0,0,1,1198.01,613.3Z"
+										transform="translate(-1196.31 -593)"></path>
+								</svg>
+								<span class="figure">{{ unit.bathrooms }}</span>
+							</div>
+						</div>
+															{% endif %}
 
                                                     <div class="rh_prop_card__meta">
                                                         <span class="rh_meta_titles">
@@ -715,9 +696,9 @@
 	c1.104,0,2-0.896,2-2C24,21.262,23.596,20.624,23,20.277z"></path>
                                                             </svg>
                                                             <span class="figure">
-                                                                52000 </span>
+                                                                {{ unit.area }} </span>
                                                             <span class="label">
-                                                                sq ft </span>
+                                                                sq meter </span>
                                                         </div>
                                                     </div> <!-- /.rh_prop_card__meta -->
                                                 </div>
@@ -727,12 +708,17 @@
                                                 <div class="rh_prop_card__priceLabel">
 
                                                     <span class="rh_prop_card__status">
-                                                        For Sale </span>
+                                                    {% if unit.status %}
+                                                        For Sale
+                                                        {% else %}
+                                                        For rent
+                                                    {% endif %}
+                                                    </span>
                                                     <!-- /.rh_prop_card__type -->
 
 
                                                     <p class="rh_prop_card__price">
-                                                        $6,950,000
+
                                                     </p>
                                                     <!-- /.rh_prop_card__price -->
 
@@ -746,179 +732,7 @@
                                         <!-- /.rh_prop_card__wrap -->
 
                                     </article><!-- /.rh_prop_card -->
-
-                                    <article class="rh_prop_card rh_prop_card--listing">
-
-                                        <div class="rh_prop_card__wrap">
-
-                                            <div class="rh_label rh_label__property_grid">
-                                                <div class="rh_label__wrap">
-                                                    Featured <span></span>
-                                                </div>
-                                            </div> <!-- /.rh_label -->
-
-                                            <figure class="rh_prop_card__thumbnail">
-                                                <div class="rh_figure_property_one">
-                                                    <a href="./../home-in-coral-gables/index.html">
-                                                        <img width="680" height="383"
-                                                            src="./../../wp-content/uploads/2017/06/house-00.jpg"
-                                                            class="attachment-modern-property-child-slider size-modern-property-child-slider wp-post-image"
-                                                            alt="" loading="lazy"> </a>
-
-                                                    <div class="rh_overlay"></div>
-                                                    <div class="rh_overlay__contents rh_overlay__fadeIn-bottom">
-                                                        <a href="./../home-in-coral-gables/index.html">View Property</a>
-                                                    </div>
-                                                    <!-- /.rh_overlay__contents -->
-
-                                                </div>
-                                                <div class="rh_prop_card__btns">
-                                                    <span class="favorite-btn-wrap favorite-btn-42">
-                                                        <span
-                                                            class="favorite-placeholder highlight__red hide user_not_logged_in"
-                                                            data-propertyid="42" data-tooltip="Added to favorites">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24"
-                                                                height="24" viewbox="0 0 24 21">
-                                                                <path class="rh_svg"
-                                                                    d="M1089.48,1923.98a6.746,6.746,0,0,1,9.54,9.54L1089,1943l-10.02-9.48a6.746,6.746,0,0,1,9.54-9.54A0.641,0.641,0,0,0,1089.48,1923.98Z"
-                                                                    transform="translate(-1077 -1922)"></path>
-                                                            </svg> </span>
-                                                        <a href="#" class="favorite add-to-favorite user_not_logged_in"
-                                                            data-tooltip="Add to favorites" data-propertyid="42">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24"
-                                                                height="24" viewbox="0 0 24 21">
-                                                                <path class="rh_svg"
-                                                                    d="M1089.48,1923.98a6.746,6.746,0,0,1,9.54,9.54L1089,1943l-10.02-9.48a6.746,6.746,0,0,1,9.54-9.54A0.641,0.641,0,0,0,1089.48,1923.98Z"
-                                                                    transform="translate(-1077 -1922)"></path>
-                                                            </svg> </a>
-                                                    </span>
-                                                    <span class="add-to-compare-span compare-btn-42"
-                                                        data-property-id="42" data-property-title="Home in Coral Gables"
-                                                        data-property-url="./property/home-in-coral-gables/"
-                                                        data-property-image="../../static/wp-content/uploads/2017/06/house-00.jpg">
-                                                        <span class="compare-placeholder highlight hide"
-                                                            data-tooltip="Added to compare">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24"
-                                                                height="24" viewbox="0 0 24 24">
-                                                                <path
-                                                                    d="M1144,1942l-8,1v3l-7-5,7-5v3l8,1A1,1,0,0,1,1144,1942Zm-22-14,8,1v3l7-5-7-5v3l-8,1A1,1,0,0,0,1122,1928Z"
-                                                                    transform="translate(-1121 -1922)"></path>
-                                                            </svg>
-                                                        </span>
-                                                        <a class="rh_trigger_compare add-to-compare"
-                                                            href="./../home-in-coral-gables/index.html"
-                                                            data-tooltip="Add to compare">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24"
-                                                                height="24" viewbox="0 0 24 24">
-                                                                <path
-                                                                    d="M1144,1942l-8,1v3l-7-5,7-5v3l8,1A1,1,0,0,1,1144,1942Zm-22-14,8,1v3l7-5-7-5v3l-8,1A1,1,0,0,0,1122,1928Z"
-                                                                    transform="translate(-1121 -1922)"></path>
-                                                            </svg>
-                                                        </a>
-                                                    </span>
-                                                </div>
-                                                <!-- /.rh_prop_card__btns -->
-                                            </figure>
-                                            <!-- /.rh_prop_card__thumbnail -->
-
-                                            <div class="rh_prop_card__details">
-
-                                                <h3>
-                                                    <a href="./../home-in-coral-gables/index.html">Home in Coral
-                                                        Gables</a>
-                                                </h3>
-
-                                                <p class="rh_prop_card__excerpt">Elegant retreat in a quiet Coral Gables
-                                                    setting. This home&hellip;</p>
-                                                <!-- /.rh_prop_card__excerpt -->
-
-                                                <div class="rh_prop_card__meta_wrap">
-
-                                                    <div class="rh_prop_card__meta">
-                                                        <span class="rh_meta_titles">
-                                                            Bedrooms </span>
-                                                        <div>
-                                                            <svg class="rh_svg" xmlns="http://www.w3.org/2000/svg"
-                                                                width="24" height="24" viewbox="0 0 24 24">
-                                                                <defs>
-                                                                </defs>
-                                                                <path
-                                                                    d="M1111.91,600.993h16.17a2.635,2.635,0,0,1,2.68,1.773l1.21,11.358a2.456,2.456,0,0,1-2.61,2.875h-18.73a2.46,2.46,0,0,1-2.61-2.875l1.21-11.358A2.635,2.635,0,0,1,1111.91,600.993Zm0.66-7.994h3.86c1.09,0,2.57.135,2.57,1l0.01,3.463c0.14,0.838-1.72,1.539-2.93,1.539h-4.17c-1.21,0-2.07-.7-1.92-1.539l0.37-3.139A2.146,2.146,0,0,1,1112.57,593Zm11,0h3.86a2.123,2.123,0,0,1,2.2,1.325l0.38,3.139c0.14,0.838-.72,1.539-1.93,1.539h-5.17c-1.21,0-2.07-.7-1.92-1.539L1121,594C1121,593.1,1122.48,593,1123.57,593Z"
-                                                                    transform="translate(-1108 -593)"></path>
-                                                            </svg>
-                                                            <span class="figure">4</span>
-                                                        </div>
-                                                    </div> <!-- /.rh_prop_card__meta -->
-
-                                                    <div class="rh_prop_card__meta">
-                                                        <span class="rh_meta_titles">
-                                                            Bathrooms </span>
-                                                        <div>
-                                                            <svg class="rh_svg" xmlns="http://www.w3.org/2000/svg"
-                                                                width="23.69" height="24" viewbox="0 0 23.69 24">
-                                                                <path
-                                                                    d="M1204,601a8,8,0,0,1,16,0v16h-2V601a6,6,0,0,0-12,0v1h-2v-1Zm7,6a6,6,0,0,0-12,0h12Zm-6,2a1,1,0,0,1,1,1v1a1,1,0,0,1-2,0v-1A1,1,0,0,1,1205,609Zm0,5a1,1,0,0,1,1,1v1a1,1,0,0,1-2,0v-1A1,1,0,0,1,1205,614Zm4.94-5.343a1,1,0,0,1,1.28.6l0.69,0.878a1,1,0,0,1-1.88.685l-0.69-.879A1,1,0,0,1,1209.94,608.657Zm2.05,4.638a1,1,0,0,1,1.28.6l0.35,0.94a1.008,1.008,0,0,1-.6,1.282,1,1,0,0,1-1.28-.6l-0.35-.939A1.008,1.008,0,0,1,1211.99,613.295Zm-11.93-4.638a1,1,0,0,1,.6,1.282l-0.69.879a1,1,0,1,1-1.87-.682l0.68-.88A1,1,0,0,1,1200.06,608.657Zm-2.05,4.639a1,1,0,0,1,.6,1.281l-0.34.941a1,1,0,0,1-1.88-.683l0.34-.94A1,1,0,0,1,1198.01,613.3Z"
-                                                                    transform="translate(-1196.31 -593)"></path>
-                                                            </svg>
-                                                            <span class="figure">4.5</span>
-                                                        </div>
-                                                    </div> <!-- /.rh_prop_card__meta -->
-
-
-                                                    <div class="rh_prop_card__meta">
-                                                        <span class="rh_meta_titles">
-                                                            Area </span>
-                                                        <div>
-                                                            <svg class="rh_svg" version="1.1"
-                                                                xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
-                                                                width="24px" height="24px" viewbox="0 0 24 24"
-                                                                enable-background="new 0 0 24 24" xml:space="preserve">
-                                                                <g>
-                                                                    <circle cx="2" cy="2" r="2"></circle>
-                                                                </g>
-                                                                <g>
-                                                                    <circle cx="2" cy="22" r="2"></circle>
-                                                                </g>
-                                                                <g>
-                                                                    <circle cx="22" cy="2" r="2"></circle>
-                                                                </g>
-                                                                <rect x="1" y="1" width="2" height="22"></rect>
-                                                                <rect x="1" y="1" width="22" height="2"></rect>
-                                                                <path opacity="0.5" d="M23,20.277V1h-2v19.277C20.7,20.452,20.452,20.7,20.277,21H1v2h19.277c0.347,0.596,0.984,1,1.723,1
-	c1.104,0,2-0.896,2-2C24,21.262,23.596,20.624,23,20.277z"></path>
-                                                            </svg>
-                                                            <span class="figure">
-                                                                3800 </span>
-                                                            <span class="label">
-                                                                sq ft </span>
-                                                        </div>
-                                                    </div> <!-- /.rh_prop_card__meta -->
-                                                </div>
-                                                <!-- /.rh_prop_card__meta_wrap -->
-
-
-                                                <div class="rh_prop_card__priceLabel">
-
-                                                    <span class="rh_prop_card__status">
-                                                        For Sale </span>
-                                                    <!-- /.rh_prop_card__type -->
-
-
-                                                    <p class="rh_prop_card__price">
-                                                        $850,000
-                                                    </p>
-                                                    <!-- /.rh_prop_card__price -->
-
-                                                </div>
-                                                <!-- /.rh_prop_card__priceLabel -->
-
-                                            </div>
-                                            <!-- /.rh_prop_card__details -->
-
-                                        </div>
-                                        <!-- /.rh_prop_card__wrap -->
-
-                                    </article><!-- /.rh_prop_card -->
+{% endfor %}
                                 </div>
                                 <!-- /.rh_property__container -->
                             </section><!-- /.rh_property__similar -->
