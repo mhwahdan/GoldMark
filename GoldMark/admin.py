@@ -1,7 +1,8 @@
 from django.contrib import admin
 from flat_json_widget.widgets import FlatJsonWidget
 from django.db import models
-from .models import Property, Location, Bank, Developer, Agent, PropertyImage
+from .models import Property, Location, Bank, Developer, Agent, PropertyImage, \
+                    FaqCategory, Faq
 
 
 # Register your models here.
@@ -27,3 +28,5 @@ admin.site.register(Location)
 admin.site.register(Bank)
 admin.site.register(Developer)
 admin.site.register(Agent)
+admin.site.register(FaqCategory)
+admin.site.register(Faq)
