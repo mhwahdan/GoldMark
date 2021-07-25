@@ -222,7 +222,7 @@
 						{{ result.time_posted }}
 					</div>
 					<div class="rh_prop_card_meta_theme_stylish">
-						{% if result.get_type == 'Residential' %}
+						{% if result.bedrooms %}
 						<div class="rh_prop_card__meta">
 							<span class="rh_meta_titles">Bedrooms</span>
 							<div class="rh_meta_icon_wrapper">
@@ -237,6 +237,8 @@
 								<span class="figure">{{ result.bedrooms }}</span>
 							</div>
 						</div>
+                            {% endif %}
+                        {% if result.bathrooms %}
 						<div class="rh_prop_card__meta">
 							<span class="rh_meta_titles">Bathrooms</span>
 							<div class="rh_meta_icon_wrapper">
@@ -272,7 +274,7 @@
 	c1.104,0,2-0.896,2-2C24,21.262,23.596,20.624,23,20.277z"></path>
 								</svg>
 								<span class="figure">{{ result.area }}</span>
-								<span class="label">sq ft</span>
+								<span class="label">sq meter</span>
 							</div>
 						</div>
 					</div>
@@ -290,46 +292,6 @@
 									{{ result.price }} EGP </p>
 							</div>
 						</div>
-
-						<div class="rh_fav_icon_box rh_parent_fav_button">
-							<span class="favorite-btn-wrap favorite-btn-45">
-								<span class="favorite-placeholder highlight__red hide user_not_logged_in"
-									data-propertyid="45" data-tooltip="Added to favorites">
-									<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 21">
-										<path class="rh_svg"
-											d="M1089.48,1923.98a6.746,6.746,0,0,1,9.54,9.54L1089,1943l-10.02-9.48a6.746,6.746,0,0,1,9.54-9.54A0.641,0.641,0,0,0,1089.48,1923.98Z"
-											transform="translate(-1077 -1922)"></path>
-									</svg> </span>
-								<a href="#" class="favorite add-to-favorite user_not_logged_in"
-									data-tooltip="Add to favorites" data-propertyid="45">
-									<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 21">
-										<path class="rh_svg"
-											d="M1089.48,1923.98a6.746,6.746,0,0,1,9.54,9.54L1089,1943l-10.02-9.48a6.746,6.746,0,0,1,9.54-9.54A0.641,0.641,0,0,0,1089.48,1923.98Z"
-											transform="translate(-1077 -1922)"></path>
-									</svg> </a>
-							</span>
-							<span class="add-to-compare-span compare-btn-45" data-property-id="45"
-								data-property-title="Home in Merrick Way"
-								data-property-url="./property/home-in-merrick-way/"
-								data-property-image="./wp-content/uploads/2017/06/exterior-05.jpg">
-								<span class="compare-placeholder highlight hide" data-tooltip="Added to compare">
-									<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24">
-										<path
-											d="M1144,1942l-8,1v3l-7-5,7-5v3l8,1A1,1,0,0,1,1144,1942Zm-22-14,8,1v3l7-5-7-5v3l-8,1A1,1,0,0,0,1122,1928Z"
-											transform="translate(-1121 -1922)"></path>
-									</svg>
-								</span>
-								<a class="rh_trigger_compare add-to-compare"
-									href="./../property/home-in-merrick-way/index.html" data-tooltip="Add to compare">
-									<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24">
-										<path
-											d="M1144,1942l-8,1v3l-7-5,7-5v3l8,1A1,1,0,0,1,1144,1942Zm-22-14,8,1v3l7-5-7-5v3l-8,1A1,1,0,0,0,1122,1928Z"
-											transform="translate(-1121 -1922)"></path>
-									</svg>
-								</a>
-							</span>
-
-						</div>
 					</div>
 
 				</div>
@@ -342,8 +304,19 @@
 	<!-- /.rh_page__listing -->
 
 	<div class="rh_pagination">
-		<a href="home.html" class="rh_pagination__btn current">1</a> <a href="./page/2/index.html"
-			class="rh_pagination__btn">2</a>
+
+        {% if results.has_previous %}
+            <a  href="?page=1">1</a>
+            <a href="?page={{ results.previous_page_number }}">{{ results.previous_page_number }}</a>
+        {% endif %}
+
+        <a href="?page={{ results.number }}" class="rh_pagination__btn current">{{ results.number }}
+        </a>
+
+        {% if page_obj.has_next %}
+            <a class="rh_pagination__btn" href="?page={{ results.next_page_number }}">{{ results.next_page_number }}</a>
+            <a class="rh_pagination__btn" href="?page={{ results.paginator.num_pages }}">{{ results.paginator.num_pages }}</a>
+        {% endif %}
 	</div>
 	</div>
 	<!-- /.rh_page rh_page__main -->

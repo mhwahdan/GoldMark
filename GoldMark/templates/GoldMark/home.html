@@ -682,7 +682,23 @@
 																			</article>
 																		</div>
 																		{% endfor %}
-																	</div>
+                                                                    </div>
+                                                                																		<div class="rh_pagination">
+
+        {% if for_sale.has_previous %}
+            <a  href="?page_s=1&page_r={{ for_rent.number }}">1</a>
+            <a href="?page_s={{ for_sale.previous_page_number }}&page_r={{ for_rent.number }}">{{ for_sale.previous_page_number }}</a>
+        {% endif %}
+
+        <a href="?page_s={{ for_sale.number }}&page_r={{ for_rent.number }}" class="rh_pagination__btn current">{{ for_sale.number }}
+        </a>
+
+        {% if page_obj.has_next %}
+            <a class="rh_pagination__btn" href="?page_s={{ for_sale.next_page_number }}&page_r={{ for_rent.number }}">{{ for_sale.next_page_number }}</a>
+            <a class="rh_pagination__btn" href="?page_s={{ for_sale.paginator.num_pages }}&page_r={{ for_rent.number }}">{{ for_sale.paginator.num_pages }}</a>
+        {% endif %}
+	</div>
+
 																	<div class="rhea_svg_loader">
 																		<svg xmlns="http://www.w3.org/2000/svg"
 																			viewbox="0 0 32 32" width="32" height="32"
@@ -973,7 +989,21 @@ c1.104,0,2-0.896,2-2C24,21.262,23.596,20.624,23,20.277z"></path>
 																</div>
 																{% endfor %}
 															</div>
+<div class="rh_pagination">
 
+        {% if for_rent.has_previous %}
+            <a  href="?page_s=1&page_r={{ for_rent.number }}">1</a>
+            <a href="?page_s={{ for_sale.number }}&page_r={{ for_rent.previous_page_number }}">{{ for_rent.previous_page_number }}</a>
+        {% endif %}
+
+        <a href="?page_s={{ for_sale.number }}&page_r={{ for_rent.number }}" class="rh_pagination__btn current">{{ for_rent.number }}
+        </a>
+
+        {% if page_obj.has_next %}
+            <a class="rh_pagination__btn" href="?page_s={{ for_sale.number }}&page_r={{ for_rent.next_page_number }}">{{ for_rent.next_page_number }}</a>
+            <a class="rh_pagination__btn" href="?page_s={{ for_sale.number }}&page_r={{ for_rent.paginator.num_pages }}">{{ for_rent.paginator.num_pages }}</a>
+        {% endif %}
+	</div>
 															<div class="rhea_svg_loader">
 																<svg xmlns="http://www.w3.org/2000/svg"
 																	viewbox="0 0 32 32" width="32" height="32"
