@@ -32,47 +32,20 @@
 <div class="wp-block-quick-and-easy-faqs-faqs-filterable-accordion">            <div class="qae-faqs-container qae-faqs-toggle-container">
 							<ul class="qe-faqs-filters-container">
 				<li><a class="qe-faqs-filter" href="#" data-filter="*">All</a></li>
-				<li><a class="qe-faqs-filter" href="#agents-faqs" data-filter=".agents-faqs">Agents FAQs</a></li>			</ul>
-					<div id="qaef-3553" class="qe-faq-toggle agents-faqs">
+                                 {% for category in categories %}
+				<li><a class="qe-faqs-filter" href="#{{ category.get_class_name }}" data-filter=".{{ category.get_class_name }}">{{ category.name }} FAQS</a></li>
+                            {% endfor %}</ul>
+{% for FAQ in FAQS %}
+					<div id="qaef-3553" class="qe-faq-toggle {{ FAQ.category.get_class_name }}">
 			<div class="qe-toggle-title">
 				<h4>
-					<i class="fa fa-minus-circle"></i> What is the difference between a real estate agent and a real estate broker?				</h4>
+					<i class="fa fa-minus-circle"></i>{{ FAQ.question }} ?</h4>
 			</div>
 			<div class="qe-toggle-content">
-				Most states require real estate sales professionals to be licensed by the state, so that they can control education and experience requirements and have a central authority to resolve consumer problems.
+                {{ FAQ.answer }}</div>
+    		            </div>
+{% endfor %}
 
-The terminology used to identify real estate professionals varies a little from state to state. Brokers are generally required to have more education and experience than real estate salespersons or agents.
-
-The person you normally deal with is a real estate agent or salesperson. The salesperson is licensed by the state, but must work for a broker. All listings are placed in the broker&#8217;s name, not the salesperson&#8217;s.
-
-A broker can deal directly with home buyers and sellers, or can have a staff of salespersons or agents working for him or her. 			</div>
-		</div>
-				<div id="qaef-3555" class="qe-faq-toggle agents-faqs">
-			<div class="qe-toggle-title">
-				<h4>
-					<i class="fa fa-minus-circle"></i> Why should I use a real estate salesperson?				</h4>
-			</div>
-			<div class="qe-toggle-content">
-				<p>A real estate salesperson is more than just a &#8220;sales person.&#8221; They act on your behalf as your agent, providing you with advice and guidance and doing a job &#8211; helping you buy or sell a home. While it is true they get paid for what they do, so do other professions that provide advice, guidance, and have a service to sell &#8211;such as Certified Public Accountants and Attorneys</p>
-<p>The Internet has opened up a world of information that wasn&#8217;t previously available to homebuyers and seller. The data on listings available for sale is almost current &#8211; but not quite. There are times when you need the most current information about what has sold or is for sale, and the only way to get that is with an agent.</p>
-<p>If you&#8217;re selling a home, you gain access to the most buyers by being listed in the Multiple Listing Service. Only a licensed real estate agent who is a member of your local MLS can get you listed there &#8211; which then gets you automatically listed on some of the major real estate web sites. If you&#8217;re buying or selling a home, the MLS is your agent&#8217;s best tool.</p>
-<p>However, the role of an agent has changed in the last couple of years. In the past, agents were the only way home buyers and sellers could access information. Now agents are evolving. Because today&#8217;s home buyers and sellers are so much better informed than in the past, expertise and ability are becoming more important.</p>
-<p>The real estate agent is becoming more of a &#8220;guide&#8221; than a &#8220;salesperson&#8221; &#8212; your personal representative in buying or selling a home.</p>
-			</div>
-		</div>
-				<div id="qaef-3556" class="qe-faq-toggle agents-faqs">
-			<div class="qe-toggle-title">
-				<h4>
-					<i class="fa fa-minus-circle"></i> I have a family friend who is a Realtor. I like her and she is a help but she gives me one price to sell my home for and I think it is too low. So I called another agent who suggested a price more in line with my expectations. Who do I choose?				</h4>
-			</div>
-			<div class="qe-toggle-content">
-				<p>You might want to consult a couple more Realtors on the market value of your home. Most of the estimates should be in the same ballpark.</p>
-<p>It could be that your friend is being more honest with you about the value of your home and the other Realtor gave you a higher number because he already knew you expected it. This is called &#8220;Buying a Listing&#8221; and is the subject of an article on our web site.</p>
-<p>Or it could simply be that your friend is a good friend, but not that great of a real estate agent.</p>
-<p>Mixing business and friendships is always risky to the friendship. On the other hand, if your friend is truly competent and was providing wise advice, she may be offended if you ignore the advice and choose another agent.</p>
-			</div>
-		</div>
-		            </div>
 		</div>
                             </div>
 
@@ -89,7 +62,8 @@ A broker can deal directly with home buyers and sellers, or can have a staff of 
 		            <div class="rh_page rh_page__sidebar">
 				    <aside class="rh_sidebar">
 <section id="featured_properties_widget-2" class="widget clearfix Featured_Properties_Widget"><h3 class="title">Featured Properties</h3>
-<article class="rh_prop_card rh_prop_card--block">
+{% for property in featured %}
+    <article class="rh_prop_card rh_prop_card--block">
 
 	<div class="rh_prop_card__wrap">
 
@@ -102,42 +76,17 @@ A broker can deal directly with home buyers and sellers, or can have a staff of 
 
 		<figure class="rh_prop_card__thumbnail">
 			<div class="rh_figure_property_one">
-                <a href="./../property/home-in-merrick-way/index.html">
-					<img width="680" height="395" src="./../wp-content/uploads/2017/06/exterior-05.jpg" class="attachment-modern-property-child-slider size-modern-property-child-slider wp-post-image" alt="House" loading="lazy">                </a>
+                <a href="{% url 'properties' %}?id={{ property.id }}">
+					<img width="680" height="395" src="{{ property.image.url }}" class="attachment-modern-property-child-slider size-modern-property-child-slider wp-post-image" alt="House" loading="lazy">                </a>
 
 
 				<div class="rh_overlay"></div>
 				<div class="rh_overlay__contents rh_overlay__fadeIn-bottom">
-											<a href="./../property/home-in-merrick-way/index.html">View Property</a>
+											<a href="{% url 'properties' %}?id={{ property.id }}">View Property</a>
 										</div>
-				            <span style="background: #dd3333" class="property-label">Hot</span>
 						</div>
 			<!-- /.rh_overlay__contents -->
 
-			<div class="rh_prop_card__btns">
-										<span class="favorite-btn-wrap favorite-btn-45">
-							<span class="favorite-placeholder highlight__red hide user_not_logged_in" data-propertyid="45" data-tooltip="Added to favorites">
-								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 21">
-  <path class="rh_svg" d="M1089.48,1923.98a6.746,6.746,0,0,1,9.54,9.54L1089,1943l-10.02-9.48a6.746,6.746,0,0,1,9.54-9.54A0.641,0.641,0,0,0,1089.48,1923.98Z" transform="translate(-1077 -1922)"></path>
-</svg>							</span>
-							<a href="#" class="favorite add-to-favorite user_not_logged_in" data-tooltip="Add to favorites" data-propertyid="45">
-								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 21">
-  <path class="rh_svg" d="M1089.48,1923.98a6.746,6.746,0,0,1,9.54,9.54L1089,1943l-10.02-9.48a6.746,6.746,0,0,1,9.54-9.54A0.641,0.641,0,0,0,1089.48,1923.98Z" transform="translate(-1077 -1922)"></path>
-</svg>							</a>
-						</span>
-										<span class="add-to-compare-span compare-btn-45" data-property-id="45" data-property-title="Home in Merrick Way" data-property-url="./property/home-in-merrick-way/" data-property-image="./wp-content/uploads/2017/06/exterior-05.jpg">
-					<span class="compare-placeholder highlight hide" data-tooltip="Added to compare">
-						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24">
-  <path d="M1144,1942l-8,1v3l-7-5,7-5v3l8,1A1,1,0,0,1,1144,1942Zm-22-14,8,1v3l7-5-7-5v3l-8,1A1,1,0,0,0,1122,1928Z" transform="translate(-1121 -1922)"></path>
-</svg>
-					</span>
-					<a class="rh_trigger_compare add-to-compare" href="./../property/home-in-merrick-way/index.html" data-tooltip="Add to compare">
-						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24">
-  <path d="M1144,1942l-8,1v3l-7-5,7-5v3l8,1A1,1,0,0,1,1144,1942Zm-22-14,8,1v3l7-5-7-5v3l-8,1A1,1,0,0,0,1122,1928Z" transform="translate(-1121 -1922)"></path>
-</svg>
-					</a>
-				</span>
-							</div>
 			<!-- /.rh_prop_card__btns -->
 		</figure>
 		<!-- /.rh_prop_card__thumbnail -->
@@ -145,13 +94,13 @@ A broker can deal directly with home buyers and sellers, or can have a staff of 
 		<div class="rh_prop_card__details">
 
 			<h3>
-				<a href="./../property/home-in-merrick-way/index.html">Home in Merrick Way</a>
+				<a href="{% url 'properties' %}?id={{ property.id }}">{{ property.name}}</a>
 			</h3>
-			<p class="rh_prop_card__excerpt">Enchanting three bedroom, three bath home with spacious one bedroom,&hellip;</p>
+			<p class="rh_prop_card__excerpt">{{ property.description }}</p>
 			<!-- /.rh_prop_card__excerpt -->
 
 			<div class="rh_prop_card__meta_wrap">
-
+{% if property.bedrooms %}
 									<div class="rh_prop_card__meta">
                                                     <span class="rh_meta_titles">
                                                            Bedrooms                                                    </span>
@@ -161,11 +110,12 @@ A broker can deal directly with home buyers and sellers, or can have a staff of 
   </defs>
   <path d="M1111.91,600.993h16.17a2.635,2.635,0,0,1,2.68,1.773l1.21,11.358a2.456,2.456,0,0,1-2.61,2.875h-18.73a2.46,2.46,0,0,1-2.61-2.875l1.21-11.358A2.635,2.635,0,0,1,1111.91,600.993Zm0.66-7.994h3.86c1.09,0,2.57.135,2.57,1l0.01,3.463c0.14,0.838-1.72,1.539-2.93,1.539h-4.17c-1.21,0-2.07-.7-1.92-1.539l0.37-3.139A2.146,2.146,0,0,1,1112.57,593Zm11,0h3.86a2.123,2.123,0,0,1,2.2,1.325l0.38,3.139c0.14,0.838-.72,1.539-1.93,1.539h-5.17c-1.21,0-2.07-.7-1.92-1.539L1121,594C1121,593.1,1122.48,593,1123.57,593Z" transform="translate(-1108 -593)"></path>
 </svg>
-							<span class="figure">3</span>
+							<span class="figure">{{ property.bedrooms }}</span>
 						</div>
 					</div>
 					<!-- /.rh_prop_card__meta -->
-
+{% endif %}
+            {% if property.bathrooms %}
 									<div class="rh_prop_card__meta">
                                                     <span class="rh_meta_titles">
                                                             Bathrooms                                                    </span>
@@ -173,11 +123,11 @@ A broker can deal directly with home buyers and sellers, or can have a staff of 
 							<svg class="rh_svg" xmlns="http://www.w3.org/2000/svg" width="23.69" height="24" viewbox="0 0 23.69 24">
   <path d="M1204,601a8,8,0,0,1,16,0v16h-2V601a6,6,0,0,0-12,0v1h-2v-1Zm7,6a6,6,0,0,0-12,0h12Zm-6,2a1,1,0,0,1,1,1v1a1,1,0,0,1-2,0v-1A1,1,0,0,1,1205,609Zm0,5a1,1,0,0,1,1,1v1a1,1,0,0,1-2,0v-1A1,1,0,0,1,1205,614Zm4.94-5.343a1,1,0,0,1,1.28.6l0.69,0.878a1,1,0,0,1-1.88.685l-0.69-.879A1,1,0,0,1,1209.94,608.657Zm2.05,4.638a1,1,0,0,1,1.28.6l0.35,0.94a1.008,1.008,0,0,1-.6,1.282,1,1,0,0,1-1.28-.6l-0.35-.939A1.008,1.008,0,0,1,1211.99,613.295Zm-11.93-4.638a1,1,0,0,1,.6,1.282l-0.69.879a1,1,0,1,1-1.87-.682l0.68-.88A1,1,0,0,1,1200.06,608.657Zm-2.05,4.639a1,1,0,0,1,.6,1.281l-0.34.941a1,1,0,0,1-1.88-.683l0.34-.94A1,1,0,0,1,1198.01,613.3Z" transform="translate(-1196.31 -593)"></path>
 </svg>
-							<span class="figure">3</span>
+							<span class="figure">{{ property.bathrooms }}</span>
 						</div>
 					</div>
 					<!-- /.rh_prop_card__meta -->
-
+{% endif %}
 
 									<div class="rh_prop_card__meta">
                                                     <span class="rh_meta_titles">
@@ -199,9 +149,9 @@ A broker can deal directly with home buyers and sellers, or can have a staff of 
 	c1.104,0,2-0.896,2-2C24,21.262,23.596,20.624,23,20.277z"></path>
 </svg>
 							<span class="figure">
-															4300														</span>
+															{{ property.area }}														</span>
 															<span class="label">
-																sq ft															</span>
+																sq meter															</span>
 													</div>
 					</div>
 					<!-- /.rh_prop_card__meta -->
@@ -212,10 +162,15 @@ A broker can deal directly with home buyers and sellers, or can have a staff of 
 			<div class="rh_prop_card__priceLabel rh_prop_card__priceLabel_box">
 				<div class="rh_rvr_price_status_box">
 											<span class="rh_prop_card__status">
-					For Sale											</span>
+					{% if property.status %}
+                                                For Sale
+                                         {% else %}
+                                                For Rent
+                                                {% endif %}
+                                            </span>
 					<!-- /.rh_prop_card__type -->
 					<p class="rh_prop_card__price">
-						 $540,000 					</p>
+                        {{ property.price }} EGP</p>
 					<!-- /.rh_prop_card__price -->
 				</div>
 
@@ -229,145 +184,8 @@ A broker can deal directly with home buyers and sellers, or can have a staff of 
 	<!-- /.rh_prop_card__wrap -->
 
 </article>
-<article class="rh_prop_card rh_prop_card--block">
-
-	<div class="rh_prop_card__wrap">
-
-					<div class="rh_label rh_label__featured_widget">
-				<div class="rh_label__wrap">
-					Featured					<span></span>
-				</div>
-			</div>
-			<!-- /.rh_label -->
-
-		<figure class="rh_prop_card__thumbnail">
-			<div class="rh_figure_property_one">
-                <a href="./../property/villa-on-grand-avenue/index.html">
-					<img width="680" height="383" src="./../wp-content/uploads/2017/06/house-02.jpg" class="attachment-modern-property-child-slider size-modern-property-child-slider wp-post-image" alt="" loading="lazy">                </a>
-
-
-				<div class="rh_overlay"></div>
-				<div class="rh_overlay__contents rh_overlay__fadeIn-bottom">
-											<a href="./../property/villa-on-grand-avenue/index.html">View Property</a>
-										</div>
-							</div>
-			<!-- /.rh_overlay__contents -->
-
-			<div class="rh_prop_card__btns">
-										<span class="favorite-btn-wrap favorite-btn-91">
-							<span class="favorite-placeholder highlight__red hide user_not_logged_in" data-propertyid="91" data-tooltip="Added to favorites">
-								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 21">
-  <path class="rh_svg" d="M1089.48,1923.98a6.746,6.746,0,0,1,9.54,9.54L1089,1943l-10.02-9.48a6.746,6.746,0,0,1,9.54-9.54A0.641,0.641,0,0,0,1089.48,1923.98Z" transform="translate(-1077 -1922)"></path>
-</svg>							</span>
-							<a href="#" class="favorite add-to-favorite user_not_logged_in" data-tooltip="Add to favorites" data-propertyid="91">
-								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 21">
-  <path class="rh_svg" d="M1089.48,1923.98a6.746,6.746,0,0,1,9.54,9.54L1089,1943l-10.02-9.48a6.746,6.746,0,0,1,9.54-9.54A0.641,0.641,0,0,0,1089.48,1923.98Z" transform="translate(-1077 -1922)"></path>
-</svg>							</a>
-						</span>
-										<span class="add-to-compare-span compare-btn-91" data-property-id="91" data-property-title="Villa on Grand Avenue" data-property-url="./property/villa-on-grand-avenue/" data-property-image="./wp-content/uploads/2017/06/house-02.jpg">
-					<span class="compare-placeholder highlight hide" data-tooltip="Added to compare">
-						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24">
-  <path d="M1144,1942l-8,1v3l-7-5,7-5v3l8,1A1,1,0,0,1,1144,1942Zm-22-14,8,1v3l7-5-7-5v3l-8,1A1,1,0,0,0,1122,1928Z" transform="translate(-1121 -1922)"></path>
-</svg>
-					</span>
-					<a class="rh_trigger_compare add-to-compare" href="./../property/villa-on-grand-avenue/index.html" data-tooltip="Add to compare">
-						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24">
-  <path d="M1144,1942l-8,1v3l-7-5,7-5v3l8,1A1,1,0,0,1,1144,1942Zm-22-14,8,1v3l7-5-7-5v3l-8,1A1,1,0,0,0,1122,1928Z" transform="translate(-1121 -1922)"></path>
-</svg>
-					</a>
-				</span>
-							</div>
-			<!-- /.rh_prop_card__btns -->
-		</figure>
-		<!-- /.rh_prop_card__thumbnail -->
-
-		<div class="rh_prop_card__details">
-
-			<h3>
-				<a href="./../property/villa-on-grand-avenue/index.html">Villa on Grand Avenue</a>
-			</h3>
-			<p class="rh_prop_card__excerpt">Spacious and fabulous home in prime location. This executive style&hellip;</p>
-			<!-- /.rh_prop_card__excerpt -->
-
-			<div class="rh_prop_card__meta_wrap">
-
-									<div class="rh_prop_card__meta">
-                                                    <span class="rh_meta_titles">
-                                                           Bedrooms                                                    </span>
-						<div>
-							<svg class="rh_svg" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24">
- <defs>
-  </defs>
-  <path d="M1111.91,600.993h16.17a2.635,2.635,0,0,1,2.68,1.773l1.21,11.358a2.456,2.456,0,0,1-2.61,2.875h-18.73a2.46,2.46,0,0,1-2.61-2.875l1.21-11.358A2.635,2.635,0,0,1,1111.91,600.993Zm0.66-7.994h3.86c1.09,0,2.57.135,2.57,1l0.01,3.463c0.14,0.838-1.72,1.539-2.93,1.539h-4.17c-1.21,0-2.07-.7-1.92-1.539l0.37-3.139A2.146,2.146,0,0,1,1112.57,593Zm11,0h3.86a2.123,2.123,0,0,1,2.2,1.325l0.38,3.139c0.14,0.838-.72,1.539-1.93,1.539h-5.17c-1.21,0-2.07-.7-1.92-1.539L1121,594C1121,593.1,1122.48,593,1123.57,593Z" transform="translate(-1108 -593)"></path>
-</svg>
-							<span class="figure">4</span>
-						</div>
-					</div>
-					<!-- /.rh_prop_card__meta -->
-
-									<div class="rh_prop_card__meta">
-                                                    <span class="rh_meta_titles">
-                                                            Bathrooms                                                    </span>
-						<div>
-							<svg class="rh_svg" xmlns="http://www.w3.org/2000/svg" width="23.69" height="24" viewbox="0 0 23.69 24">
-  <path d="M1204,601a8,8,0,0,1,16,0v16h-2V601a6,6,0,0,0-12,0v1h-2v-1Zm7,6a6,6,0,0,0-12,0h12Zm-6,2a1,1,0,0,1,1,1v1a1,1,0,0,1-2,0v-1A1,1,0,0,1,1205,609Zm0,5a1,1,0,0,1,1,1v1a1,1,0,0,1-2,0v-1A1,1,0,0,1,1205,614Zm4.94-5.343a1,1,0,0,1,1.28.6l0.69,0.878a1,1,0,0,1-1.88.685l-0.69-.879A1,1,0,0,1,1209.94,608.657Zm2.05,4.638a1,1,0,0,1,1.28.6l0.35,0.94a1.008,1.008,0,0,1-.6,1.282,1,1,0,0,1-1.28-.6l-0.35-.939A1.008,1.008,0,0,1,1211.99,613.295Zm-11.93-4.638a1,1,0,0,1,.6,1.282l-0.69.879a1,1,0,1,1-1.87-.682l0.68-.88A1,1,0,0,1,1200.06,608.657Zm-2.05,4.639a1,1,0,0,1,.6,1.281l-0.34.941a1,1,0,0,1-1.88-.683l0.34-.94A1,1,0,0,1,1198.01,613.3Z" transform="translate(-1196.31 -593)"></path>
-</svg>
-							<span class="figure">4</span>
-						</div>
-					</div>
-					<!-- /.rh_prop_card__meta -->
-
-
-									<div class="rh_prop_card__meta">
-                                                    <span class="rh_meta_titles">
-                                                             	Area                                                    </span>
-						<div>
-							<svg class="rh_svg" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="24px" height="24px" viewbox="0 0 24 24" enable-background="new 0 0 24 24" xml:space="preserve">
-<g>
-	<circle cx="2" cy="2" r="2"></circle>
-</g>
-<g>
-	<circle cx="2" cy="22" r="2"></circle>
-</g>
-<g>
-	<circle cx="22" cy="2" r="2"></circle>
-</g>
-<rect x="1" y="1" width="2" height="22"></rect>
-<rect x="1" y="1" width="22" height="2"></rect>
-<path opacity="0.5" d="M23,20.277V1h-2v19.277C20.7,20.452,20.452,20.7,20.277,21H1v2h19.277c0.347,0.596,0.984,1,1.723,1
-	c1.104,0,2-0.896,2-2C24,21.262,23.596,20.624,23,20.277z"></path>
-</svg>
-							<span class="figure">
-															9350														</span>
-															<span class="label">
-																sq ft															</span>
-													</div>
-					</div>
-					<!-- /.rh_prop_card__meta -->
-
-			</div>
-			<!-- /.rh_prop_card__meta_wrap -->
-
-			<div class="rh_prop_card__priceLabel rh_prop_card__priceLabel_box">
-				<div class="rh_rvr_price_status_box">
-											<span class="rh_prop_card__status">
-					For Rent											</span>
-					<!-- /.rh_prop_card__type -->
-					<p class="rh_prop_card__price">
-						 $4,750 Monthly					</p>
-					<!-- /.rh_prop_card__price -->
-				</div>
-
-							</div>
-			<!-- /.rh_prop_card__priceLabel -->
-
-		</div>
-		<!-- /.rh_prop_card__details -->
-
-	</div>
-	<!-- /.rh_prop_card__wrap -->
-
-</article>					</section>    </aside>
+{% endfor %}
+					</section>    </aside>
 	            </div>
 <!-- /.rh_page rh_page__sidebar -->
 

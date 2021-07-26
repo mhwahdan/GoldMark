@@ -142,6 +142,9 @@ class FaqCategory(models.Model):
     def get_faqs(self):
         return self.faq_set.all()
 
+    def get_class_name(self):
+        return self.__str__().replace(' ', '_')
+
 
 class Faq(models.Model):
     question = models.TextField(verbose_name='Question')
