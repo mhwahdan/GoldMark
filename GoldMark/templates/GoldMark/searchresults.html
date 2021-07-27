@@ -14,28 +14,13 @@
 			style="background-image: url('./wp-content/themes/realhomes/assets/modern/images/banner.jpg');">
 			<div class="rh_banner__cover"></div>
 			<div class="rh_banner__wrap">
-				<h2 class="rh_banner__title">Grid Layout Full Width</h2>
-				<div class="rh_banner__controls">
-
-					<div class="rh_view_type">
-						<a class="grid " href="home.html?view=grid">
-							<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewbox="0 0 18 18">
-								<path
-									d="M1497,1029h4a2.006,2.006,0,0,1,2,2v4a2.006,2.006,0,0,1-2,2h-4a2.006,2.006,0,0,1-2-2v-4A2.006,2.006,0,0,1,1497,1029Zm0,10h4a2.006,2.006,0,0,1,2,2v4a2.006,2.006,0,0,1-2,2h-4a2.006,2.006,0,0,1-2-2v-4A2.006,2.006,0,0,1,1497,1039Zm10-10h4a2.006,2.006,0,0,1,2,2v4a2.006,2.006,0,0,1-2,2h-4a2.006,2.006,0,0,1-2-2v-4A2.006,2.006,0,0,1,1507,1029Zm0,10h4a2.006,2.006,0,0,1,2,2v4a2.006,2.006,0,0,1-2,2h-4a2.006,2.006,0,0,1-2-2v-4A2.006,2.006,0,0,1,1507,1039Z"
-									transform="translate(-1495 -1029)"></path>
-							</svg>
-						</a>
-						<a class="list active" href="home.html?view=list">
-							<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewbox="0 0 18 18">
-								<path id="menu"
-									d="M1539.01,1029a1.958,1.958,0,0,1,1.99,1.99,2.067,2.067,0,0,1-1.99,2.01A2,2,0,1,1,1539.01,1029Zm5.99,0h8a2,2,0,0,1,0,4h-8A2,2,0,0,1,1545,1029Zm-5.99,7a1.958,1.958,0,0,1,1.99,1.99,2.067,2.067,0,0,1-1.99,2.01A2,2,0,1,1,1539.01,1036Zm5.99,0h8a2.006,2.006,0,0,1,2,2h0a2.006,2.006,0,0,1-2,2h-8a2.006,2.006,0,0,1-2-2h0A2.006,2.006,0,0,1,1545,1036Zm-5.99,7a1.958,1.958,0,0,1,1.99,1.99,2.067,2.067,0,0,1-1.99,2.01A2,2,0,1,1,1539.01,1043Zm5.99,0h8a2.006,2.006,0,0,1,2,2h0a2.006,2.006,0,0,1-2,2h-8a2.006,2.006,0,0,1-2-2h0A2.006,2.006,0,0,1,1545,1043Z"
-									transform="translate(-1537 -1029)"></path>
-							</svg>
-						</a>
-					</div>
-					<!-- /.rh_view_type -->
-				</div>
-
+				<h2 class="rh_banner__title">
+                    {% if results|length != 0 %}
+                    {{ results|length }} of our Properties suits your needs
+                    {% else %}
+                Sorry but we could not find a property with your requirements
+                {% endif %}
+                </h2>
 			</div>
 		</section>
 		{% include 'GoldMark/searchbar.html' %}
@@ -320,6 +305,14 @@
 	</div>
 	</div>
 	<!-- /.rh_page rh_page__main -->
+                        {% else %}
+            <article style="width: 80%;margin: auto;" id="post-4544" class="rh_prop_compare__wrap">
+
+
+                                <p style="font-size: xx-large;" class="nothing-found">Sorry but we could not find a property with your requirements</p>
+
+
+                        </article>
 	{% endif %}
-	</section>
+        </section>
 	{% endblock content %}

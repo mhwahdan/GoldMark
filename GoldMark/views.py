@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from .models import Property, Location, Bank, Developer, FaqCategory, Faq
+from .models import Property, Location, Bank, Developer, FaqCategory, Faq, BlogCategory, Blog
 from django.core.paginator import Paginator
 
 
@@ -21,7 +21,8 @@ def home(request):
         'featured': featured,
         'locations': Location.objects.all(),
         'developers': Developer.objects.all(),
-        'types': Property.get_types()
+        'types': Property.get_types(),
+        'blogs': Blog.objects.all()[0:3]
     }
     return render(request, 'GoldMark/home.html', context=context)
 
@@ -50,18 +51,12 @@ def process_message(request):
 
 
 def search_properties(requests):
-    if len(requests.GET) == 0:
-        return render(requests, 'GoldMark/searchresults.html', context={
-            'locations': Location.objects.all(),
-            'developers': Developer.objects.all(),
-            'types': Property.get_types(),
-            'has_result': False})
-    result = Location.objects.all()
     indexes = requests.GET
+    properties = Property.objects.all()
     if 'location' in indexes.keys():
         locations = requests.GET.getlist('location')
         result = Location.objects.all().filter(name__in=locations)
-    properties = Property.objects.all().filter(location__in=result)
+        properties = properties.filter(location__in=result)
     if 'status' in indexes.keys():
         properties = properties.filter(status=(indexes['status'] == 'for-sale'))
     if 'min-price' in indexes.keys():
@@ -87,7 +82,7 @@ def search_properties(requests):
         'locations': Location.objects.all(),
         'developers': Developer.objects.all(),
         'types': Property.get_types(),
-        'has_result': True
+        'has_result': len(properties) != 0
     }
     return render(requests, 'GoldMark/searchresults.html', context=context)
 
@@ -103,3 +98,41 @@ def view_faqs(requests):
     }
     return render(requests, 'GoldMark/FAQS.html', context=context)
 
+
+def contact_us(requests):
+    context = {
+        'locations': Location.objects.all(),
+        'developers': Developer.objects.all(),
+        'types': Property.get_types(),
+        'categories': FaqCategory.objects.all()
+    }
+    return render(requests, 'GoldMark/contact.html', context=context)
+
+
+def blogs(requests):
+    paginator = Paginator(Blog.objects.all(), 10)
+    page_number = requests.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    context = {
+        'categories': BlogCategory.objects.all(),
+        'Blogs': page_obj,
+        'recent': Blog.objects.all()[0:3],
+        'featured': Property.objects.all().filter(featured=True)[0:3],
+        'types': Property.get_types(),
+        'developers': Developer.objects.all()
+    }
+    return render(requests, 'GoldMark/Blogs.html', context=context)
+
+
+def show_blog(requests):
+    blog_id = requests.GET["id"]
+    context = {
+        'locations': Location.objects.all(),
+        'developers': Developer.objects.all(),
+        'types': Property.get_types(),
+        'blog': Blog.objects.all().get(pk=blog_id),
+        'recent': Blog.objects.all().exclude(pk=blog_id)[0:3],
+        'categories': BlogCategory.objects.all(),
+        'featured': Property.objects.all().filter(featured=True)[0:3]
+    }
+    return render(requests, 'GoldMark/showblog.html', context=context)
