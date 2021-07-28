@@ -271,35 +271,29 @@
 
 						</div>
 
-						<form class="cfos_contact_form contact-form" method="post"
-							action="../../static/wp-admin/admin-ajax.php">
-
+						<form class="ajax-request" method="post"
+							action="{% url 'sendMessage' %}">
+                            {% csrf_token %}
 
 
 							<div class="cfos_full cfos_field_wrapper cfos_name_field">
-								<label for="cfos-name">Name</label>
-								<input class="cfos_field required" type="text" name="name" id="cfos-name"
-									placeholder="Your Name" title="* Please provide Name">
+                                <label for="{{ contact_form.name.html_name }}">{{ contact_form.name.label }}</label>
+                                {{ contact_form.name }}
 							</div>
 
 							<div class="cfos_full cfos_field_wrapper cfos_email_field">
-								<label for="cfos-email">Email</label>
-								<input class="cfos_field required" type="email" name="email" id="cfos-email"
-									placeholder="Your Email" title="* Please provide Email">
+								<label for="{{ contact_form.email.html_name }}">{{ contact_form.email.label }}</label>
+                                {{ contact_form.email }}
 							</div>
 
-							<div class="cfos_full cfos_full_tel cfos_field_wrapper cfos_number_field">
-								<label for="cfos-number">
-									Number</label>
-								<input class="cfos_field" autocomplete="off" type="tel" name="cfos-number"
-									id="cfos-number" placeholder="Your Number">
+							<div class="cfos_full cfos_field_wrapper ">
+								<label for="{{ contact_form.phonenumber.html_name }}">{{ contact_form.phonenumber.label }}</label>
+                                {{ contact_form.phonenumber }}
 							</div>
 
 							<div class="cfos_full cfos_field_wrapper cfos_textarea_field">
-								<label for="cfos-message">Message</label>
-								<textarea cols="40" rows="6" name="message" id="cfos-message"
-									class="cfos_text_field required" placeholder="Tell us about desired property"
-									title="* Please provide Message"></textarea>
+								<label for="{{ contact_form.message.html_name }}">{{ contact_form.message.label }}</label>
+                                {{ contact_form.message }}
 							</div>
 
 
@@ -322,11 +316,6 @@
 
 								<!--                        <input type="hidden" name="target" value="-->
 								<!--">-->
-
-								<input type="hidden" name="action" value="send_message_cfos">
-								<input type="hidden" name="the_id" value="105">
-								<!--                        <input type="hidden" id="cfos_full_number" name="full_phone">-->
-								<input type="hidden" name="nonce" value="de52118584">
 							</div>
 
 							<div class="inspiry_error_messages">
@@ -686,16 +675,16 @@
                                                                 																		<div class="rh_pagination">
 
         {% if for_sale.has_previous %}
-            <a  href="?page_s=1&page_r={{ for_rent.number }}">1</a>
-            <a href="?page_s={{ for_sale.previous_page_number }}&page_r={{ for_rent.number }}">{{ for_sale.previous_page_number }}</a>
+            <a  href="?page_s=1&page_r={{ for_rent.number }}&page_b={{ blogs.number }}">1</a>
+            <a href="?page_s={{ for_sale.previous_page_number }}&page_r={{ for_rent.number }}&page_b={{ blogs.number }}">{{ for_sale.previous_page_number }}</a>
         {% endif %}
 
-        <a href="?page_s={{ for_sale.number }}&page_r={{ for_rent.number }}" class="rh_pagination__btn current">{{ for_sale.number }}
+        <a href="?page_s={{ for_sale.number }}&page_r={{ for_rent.number }}&page_b={{ blogs.number }}" class="rh_pagination__btn current">{{ for_sale.number }}
         </a>
 
-        {% if page_obj.has_next %}
-            <a class="rh_pagination__btn" href="?page_s={{ for_sale.next_page_number }}&page_r={{ for_rent.number }}">{{ for_sale.next_page_number }}</a>
-            <a class="rh_pagination__btn" href="?page_s={{ for_sale.paginator.num_pages }}&page_r={{ for_rent.number }}">{{ for_sale.paginator.num_pages }}</a>
+        {% if for_sale.has_next %}
+            <a class="rh_pagination__btn" href="?page_s={{ for_sale.next_page_number }}&page_r={{ for_rent.number }}&page_b={{ blogs.number }}">{{ for_sale.next_page_number }}</a>
+            <a class="rh_pagination__btn" href="?page_s={{ for_sale.paginator.num_pages }}&page_r={{ for_rent.number }}&page_b={{ blogs.number }}">{{ for_sale.paginator.num_pages }}</a>
         {% endif %}
 	</div>
 
@@ -992,16 +981,16 @@ c1.104,0,2-0.896,2-2C24,21.262,23.596,20.624,23,20.277z"></path>
 <div class="rh_pagination">
 
         {% if for_rent.has_previous %}
-            <a  href="?page_s=1&page_r={{ for_rent.number }}">1</a>
-            <a href="?page_s={{ for_sale.number }}&page_r={{ for_rent.previous_page_number }}">{{ for_rent.previous_page_number }}</a>
+            <a  href="?page_s=1&page_r={{ for_rent.number }}&page_b={{ blogs.number }}">1</a>
+            <a href="?page_s={{ for_sale.number }}&page_r={{ for_rent.previous_page_number }}&page_b={{ blogs.number }}">{{ for_rent.previous_page_number }}</a>
         {% endif %}
 
-        <a href="?page_s={{ for_sale.number }}&page_r={{ for_rent.number }}" class="rh_pagination__btn current">{{ for_rent.number }}
+        <a href="?page_s={{ for_sale.number }}&page_r={{ for_rent.number }}&page_b={{ blogs.number }}" class="rh_pagination__btn current">{{ for_rent.number }}
         </a>
 
-        {% if page_obj.has_next %}
-            <a class="rh_pagination__btn" href="?page_s={{ for_sale.number }}&page_r={{ for_rent.next_page_number }}">{{ for_rent.next_page_number }}</a>
-            <a class="rh_pagination__btn" href="?page_s={{ for_sale.number }}&page_r={{ for_rent.paginator.num_pages }}">{{ for_rent.paginator.num_pages }}</a>
+        {% if for_rent.has_next %}
+            <a class="rh_pagination__btn" href="?page_s={{ for_sale.number }}&page_r={{ for_rent.next_page_number }}&page_b={{ blogs.number }}">{{ for_rent.next_page_number }}</a>
+            <a class="rh_pagination__btn" href="?page_s={{ for_sale.number }}&page_r={{ for_rent.paginator.num_pages }}&page_b={{ blogs.number }}">{{ for_rent.paginator.num_pages }}</a>
         {% endif %}
 	</div>
 															<div class="rhea_svg_loader">
@@ -1100,15 +1089,12 @@ c1.104,0,2-0.896,2-2C24,21.262,23.596,20.624,23,20.277z"></path>
 
 																<p class="rh_cta__title">Buy or Sell</p>
 
-																<h3 class="rh_cta__quote">Looking to Buy a new property
-																	or Sell an existing one? GoldMark provides an easy
+																<h3 class="rh_cta__quote">Looking to Buy a new property ?
+                                                                    GoldMark provides an easy
 																	solution!</h3>
 
 																<div class="rh_cta__btns_elementor">
 
-																	<a href="#"
-																		class="cta_elementor_first_button cta_elementor_button">Submit
-																		Property</a>
 
 																	<a href="{% url 'search_property' %}"
 																		class="cta_elementor_second_button cta_elementor_button">Browse
@@ -1509,7 +1495,23 @@ c1.104,0,2-0.896,2-2C24,21.262,23.596,20.624,23,20.277z"></path>
 																	</div>
 																</article>
                                                                 {% endfor %}
+
 															</div>
+                                                            	<div class="rh_pagination">
+
+        {% if blogs.has_previous %}
+            <a  href="?page_s={{ for_sale.number }}&page_r={{ for_rent.number }}&page_b=1">1</a>
+            <a href="?page_s={{ for_sale.number }}&page_r={{ for_rent.number }}&page_b={{ blogs.previous_page_number }}">{{ blogs.previous_page_number }}</a>
+        {% endif %}
+
+        <a href="?page_s={{ for_sale.number }}&page_r={{ for_rent.number }}&page_b={{ blogs.number }}" class="rh_pagination__btn current">{{ blogs.number }}
+        </a>
+
+        {% if blogs.has_next %}
+            <a class="rh_pagination__btn" href="?page_s={{ for_sale.number }}&page_r={{ for_rent.number }}&page_b={{ blogs.next_page_number }}">{{ blogs.next_page_number }}</a>
+            <a class="rh_pagination__btn" href="?page_s={{ for_sale.number }}&page_r={{ for_rent.number }}&page_b={{ blogs.paginator.num_pages }}">{{ blogs.paginator.num_pages }}</a>
+        {% endif %}
+	</div>
 
 															<div class="rhea_svg_loader">
 																<svg xmlns="http://www.w3.org/2000/svg"
@@ -1637,61 +1639,19 @@ c1.104,0,2-0.896,2-2C24,21.262,23.596,20.624,23,20.277z"></path>
 													<section class="rh_elementor_widget rh_wrapper_partners_elementor">
 
 														<div class="rh_section__partners_elementor">
+                                                            {% for developer in developers %}
 															<div
 																class="rh_partner post-118 partners type-partners status-publish has-post-thumbnail hentry rh_blog__post entry-header-margin-fix">
 
-																<a target="_blank" href="https://inspirythemes.com/"
-																	title="Adobe Homes">
+																<a target="_blank" href="{{ developer.website }}"
+																	title="{{ developer.name }}">
 																	<img width="124" height="55"
-																		src="../../static/wp-content/uploads/2017/06/one.png"
+																		src="{{ developer.image.url }}"
 																		class="attachment-partners-logo size-partners-logo wp-post-image"
 																		alt="" loading="lazy"> </a>
 
 															</div>
-															<div
-																class="rh_partner post-116 partners type-partners status-publish has-post-thumbnail hentry rh_blog__post entry-header-margin-fix">
-
-																<a target="_blank" href="https://inspirythemes.com/"
-																	title="AA Builders">
-																	<img width="254" height="80"
-																		src="../../static/wp-content/uploads/2017/06/two.png"
-																		class="attachment-partners-logo size-partners-logo wp-post-image"
-																		alt="" loading="lazy"> </a>
-
-															</div>
-															<div
-																class="rh_partner post-112 partners type-partners status-publish has-post-thumbnail hentry rh_blog__post entry-header-margin-fix">
-
-																<a target="_blank" href="https://inspirythemes.com/"
-																	title="The Capital">
-																	<img width="136" height="70"
-																		src="../../static/wp-content/uploads/2017/06/three.png"
-																		class="attachment-partners-logo size-partners-logo wp-post-image"
-																		alt="" loading="lazy"> </a>
-
-															</div>
-															<div
-																class="rh_partner post-120 partners type-partners status-publish has-post-thumbnail hentry rh_blog__post entry-header-margin-fix">
-
-																<a target="_blank" href="https://inspirythemes.com/"
-																	title="Rosewood Homes">
-																	<img width="140" height="69"
-																		src="../../static/wp-content/uploads/2017/06/four.png"
-																		class="attachment-partners-logo size-partners-logo wp-post-image"
-																		alt="" loading="lazy"> </a>
-
-															</div>
-															<div
-																class="rh_partner post-124 partners type-partners status-publish has-post-thumbnail hentry rh_blog__post entry-header-margin-fix">
-
-																<a target="_blank" href="https://inspirythemes.com/"
-																	title="Ironwood Apartments">
-																	<img width="201" height="82"
-																		src="../../static/wp-content/uploads/2017/06/five.png"
-																		class="attachment-partners-logo size-partners-logo wp-post-image"
-																		alt="" loading="lazy"> </a>
-
-															</div>
+                                                            {% endfor %}
 														</div>
 													</section>
 												</div>

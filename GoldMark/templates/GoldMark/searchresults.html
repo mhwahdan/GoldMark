@@ -298,7 +298,7 @@
         <a href="?page={{ results.number }}" class="rh_pagination__btn current">{{ results.number }}
         </a>
 
-        {% if page_obj.has_next %}
+        {% if results.has_next %}
             <a class="rh_pagination__btn" href="?page={{ results.next_page_number }}">{{ results.next_page_number }}</a>
             <a class="rh_pagination__btn" href="?page={{ results.paginator.num_pages }}">{{ results.paginator.num_pages }}</a>
         {% endif %}

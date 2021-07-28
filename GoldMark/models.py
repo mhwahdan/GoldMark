@@ -88,6 +88,9 @@ class Property(models.Model):
     parent = models.ForeignKey('self', on_delete=models.SET_NULL, blank=True, null=True,
                                verbose_name='Property it belongs to')
 
+    class Meta:
+        ordering = ['time_posted']
+
     def __str__(self):
         return self.name + " " + str(self.id)
 
@@ -151,6 +154,9 @@ class Faq(models.Model):
     answer = models.TextField(verbose_name='Answer')
     category = models.ForeignKey(FaqCategory, on_delete=models.CASCADE, verbose_name='Category')
 
+    class Meta:
+        ordering = ['question']
+
     def __str__(self):
         return self.question
 
@@ -167,12 +173,13 @@ class BlogCategory(models.Model):
 
 class Blog(models.Model):
     name = models.TextField(verbose_name='Blog name')
-    date_posted = models.DateTimeField(default=timezone.now(), verbose_name='Date of posting')
+    date_posted = models.DateTimeField(default=timezone.now, verbose_name='Date of posting')
     image = models.ImageField(upload_to='GoldMark/images/Blog/main/', verbose_name='Blog image')
-    content = models.TextField(verbose_name=B'Blog content')
+    content = models.TextField(verbose_name='Blog content')
     category = models.ForeignKey(BlogCategory, on_delete=models.CASCADE, verbose_name='Category name')
     description = models.TextField(verbose_name='Blog description')
     author = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='blog author')
+
     class Meta:
         ordering = ['date_posted']
 

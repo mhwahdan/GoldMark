@@ -2,19 +2,24 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Property, Location, Bank, Developer, FaqCategory, Faq, BlogCategory, Blog
 from django.core.paginator import Paginator
-
+from . import forms
 
 # Create your views here.
 def home(request):
     for_sale = Property.objects.all().filter(status=True)
     for_rent = Property.objects.all().filter(status=False)
     featured = Property.objects.all().filter(featured=True)
+    contactform = forms.SendMessageForm()
+    blogs = Blog.objects.all()
     paginator_sale = Paginator(for_sale, 10)
     paginator_rent = Paginator(for_rent, 10)
+    blogs_pag = Paginator(blogs, 3)
     page_number_sale = request.GET.get('page_s')
     page_number_rent = request.GET.get('page_r')
+    page_number_blog = request.GET.get('page_b')
     page_sale = paginator_sale.get_page(page_number_sale)
     page_rent = paginator_rent.get_page(page_number_rent)
+    blogs_out = blogs_pag.get_page(page_number_blog)
     context = {
         'for_sale': page_sale,
         'for_rent': page_rent,
@@ -22,7 +27,8 @@ def home(request):
         'locations': Location.objects.all(),
         'developers': Developer.objects.all(),
         'types': Property.get_types(),
-        'blogs': Blog.objects.all()[0:3]
+        'blogs': blogs_out,
+        'contact_form': contactform
     }
     return render(request, 'GoldMark/home.html', context=context)
 
@@ -104,7 +110,8 @@ def contact_us(requests):
         'locations': Location.objects.all(),
         'developers': Developer.objects.all(),
         'types': Property.get_types(),
-        'categories': FaqCategory.objects.all()
+        'categories': FaqCategory.objects.all(),
+        'contact': forms.SendMessageForm()
     }
     return render(requests, 'GoldMark/contact.html', context=context)
 
@@ -136,3 +143,5 @@ def show_blog(requests):
         'featured': Property.objects.all().filter(featured=True)[0:3]
     }
     return render(requests, 'GoldMark/showblog.html', context=context)
+
+

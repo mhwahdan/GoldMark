@@ -34,26 +34,26 @@
 
                         <div class="rh_contact__form">
 							                                    <section id="contact-form">
-                                        <form class="contact-form" method="post" action="./../wp-admin/admin-ajax.php">
+                                        <form class="ajax-request" method="post" action="{% url 'sendMessage' %}">
+                                            {% csrf_token %}
                                             <p class="rh_contact__input rh_contact__input_text">
-                                                <label for="name">Name</label>
-                                                <input type="text" name="name" id="name" class="required" placeholder="Your Name" title="* Please provide your name">
+                                                <label for="{{ contact.name.html_name }}">{{ contact.name.label }}</label>
+                                                {{ contact.name }}
                                             </p>
 
                                             <p class="rh_contact__input rh_contact__input_text">
-                                                <label for="email">Email</label>
-                                                <input type="text" name="email" id="email" class="email required" placeholder="Your Email" title="* Please provide a valid email address">
+                                                <label for="{{ contact.email.html_name }}">{{ contact.email.label }}</label>
+                                                {{ contact.email }}
                                             </p>
 
                                             <p class="rh_contact__input rh_contact__input_text">
-                                                <label for="number">Phone Number</label>
-                                                <input type="text" name="number" id="number" placeholder="Your Phone">
+                                                <label for="{{ contact.phonenumber.html_name }}">{{ contact.phonenumber.label }}</label>
+                                                {{ contact.phonenumber }}
                                             </p>
 
                                             <p class="rh_contact__input rh_contact__input_textarea">
-                                                <label for="message">Message</label>
-                                                <textarea cols="40" rows="6" name="message" id="message" class="required" placeholder="Your Message" title="* Please provide your message"></textarea>
-                                            </p>
+<label for="{{ contact.message.html_name }}">{{ contact.message.label }}</label>
+                                                {{ contact.message }}                                            </p>
 
 											
                                             <p class="rh_contact__input rh_contact__submit">
@@ -61,8 +61,6 @@
                                                 <span id="ajax-loader"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="32px" height="32px" viewbox="0 0 128 128" xml:space="preserve"><rect x="0" y="0" width="100%" height="100%" fill="#FFFFFF"></rect><g><path d="M75.4 126.63a11.43 11.43 0 0 1-2.1-22.65 40.9 40.9 0 0 0 30.5-30.6 11.4 11.4 0 1 1 22.27 4.87h.02a63.77 63.77 0 0 1-47.8 48.05v-.02a11.38 11.38 0 0 1-2.93.37z" fill="#1ea69a" fill-opacity="1"></path><animatetransform attributename="transform" type="rotate" from="0 64 64" to="360 64 64" dur="1000ms" repeatcount="indefinite"></animatetransform></g></svg>
 </span>
                                                 <input type="hidden" name="action" value="send_message">
-                                                <input type="hidden" name="the_id" value="155">
-                                                <input type="hidden" name="nonce" value="b0adb48f7d">
                                             </p>
 
                                             <div id="error-container"></div>

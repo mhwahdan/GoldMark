@@ -32,6 +32,7 @@
                 $.get("https://ipinfo.io", function() {}, "json").always(function(resp) {
                     var countryCode = (resp && resp.country) ? resp.country : "";
                     success(countryCode);
+                    $("#cfos-number").val(countryCode);
                 });
             },
             utilsScript: inspiryUtilsPath.stylesheet_directory,
