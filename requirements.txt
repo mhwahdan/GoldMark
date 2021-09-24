@@ -26,7 +26,7 @@ idna==2.6
 importlib-metadata==4.6.3
 importlib-resources==5.2.2
 incremental==16.10.1
-Jinja2==2.10
+Jinja2==2.11.3
 jsmin==2.2.2
 jsonpatch==1.16
 jsonpointer==1.10
