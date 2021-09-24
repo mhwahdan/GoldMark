@@ -16,101 +16,6 @@
 	</script>
 	<title>DTS &#8211; Dream Life
 	</title>
-    <style>
-.google-btn {
-    margin: 25px;
-    width: 80%;
-    min-width: 184px;
-    max-width: 184px;
-    height: 42px;
-    background-color: #fcfcfc;
-    border-radius: 2px;
-    box-shadow: 0 3px 4px 0 rgba(0, 0, 0, .2);
-    cursor: pointer;
-    cursor: hand;
-    align-self: center;
-    user-select: none;
-    transition: all 400ms ease 0s;
-    display: flex;
-}
-.google-btn .google-icon-wrapper {
-    position: absolute;
-    margin-top: 1px;
-    margin-left: 1px;
-    width: 40px;
-    height: 40px;
-    border-radius: 2px;
-    user-select: none
-}
-.google-btn .google-icon-svg {
-    position: absolute;
-    margin-top: 11px;
-    margin-left: 11px;
-    width: 18px;
-    height: 18px;
-    user-select: none
-}
-.google-btn .btn-text {
-    float: right;
-    margin: 11px 14px 40px 40px;
-    color: #757575;
-    font-size: 14px;
-    letter-spacing: .2px;
-    font-family: Roboto;
-    user-select: none
-}
-.google-btn:hover {
-    box-shadow: 0 3px 8px rgba(117, 117, 117, .5);
-    user-select: none
-}
-.google-btn:active {
-    box-shadow: 0 1px 1px #757575;
-    background: #F8F8F8;
-    color: #fff;
-    user-select: none
-}
-
-.normal-btn {
-    margin: 25px;
-    width: auto;
-    display: inline-block;
-    min-width: auto;
-    max-width: 184px;
-    height: 42px;
-    background-color: #fcfcfc;
-    border-radius: 2px;
-    box-shadow: 0 3px 4px 0 rgba(0, 0, 0, .2);
-    cursor: pointer;
-    cursor: hand;
-    align-self: center;-webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    transition: all 400ms ease 0s
-}
-.normal-btn .btn-text {
-    float: left;
-    margin: 11px 14px 11px 14px;
-    color: #757575;
-    font-size: 14px;
-    letter-spacing: .2px;
-    font-family: Roboto;
-    user-select: none
-}
-.normal-btn:hover {
-    box-shadow: 0 3px 8px rgba(117, 117, 117, .5);
-    user-select: none
-}
-.normal-btn:active {
-    box-shadow: 0 1px 1px #757575;
-    background: #F8F8F8;
-    color: #fff;
-    user-select: none
-}
-
-</style>
 	<meta name="robots" content="max-image-preview:large">
 	<link rel="dns-prefetch" href="//unpkg.com">
 	<link rel="dns-prefetch" href="//maps.google.com">
@@ -428,17 +333,6 @@
 				<div class="rh_form_modal rh_login_form rh_login_modal_show">
 					<form class="ajax-request" action="{% static '/assets/' %}wp-admin/admin-ajax.php" method="POST"
                           enctype="multipart/form-data">
-<a href="{% provider_login_url 'google' %}"><div class="google-btn">
-  <div class="google-icon-wrapper">
-    <img class="google-icon-svg" src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"/>
-  </div>
-  <p class="btn-text"><b>Sign in with Google</b></p>
-</div></a><a href="{% provider_login_url 'facebook' %}"><div class="google-btn">
-  <div class="google-icon-wrapper">
-    <img class="google-icon-svg" src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"/>
-  </div>
-  <p class="btn-text"><b>Sign in with Facebook</b></p>
-</div></a>
 						<label class="rh_modal_labels" for="username">Username</label>
 						<input name="log" class="rh_modal_field focus-class" autocomplete="username" id="username"
 							type="text" placeholder="Username" title="Username" required autofocus>
@@ -452,7 +346,7 @@
 					</form>
 
 				</div>
-                <div class="rh_form_modal rh_register_form rh_register_modal_show">
+                <div class="rh_form_modal rh_register_form">
 					<form class="ajax-request" action="{% static '/assets/' %}wp-admin/admin-ajax.php" method="POST"
                           enctype="multipart/form-data">
 						<label class="rh_modal_labels" for="username">Username</label>
@@ -467,7 +361,7 @@
                         <label class="rh_modal_labels" for="confirm">Confirm password</label>
                         <input name="confirm" class="rh_modal_field" autocomplete="current-password"
 							type="password" placeholder="enter password again" title="confrim password" required>
-                        <button type="submit">Login</button>
+                        <button type="submit">Create your account</button>
 					</form>
                 </div>
 

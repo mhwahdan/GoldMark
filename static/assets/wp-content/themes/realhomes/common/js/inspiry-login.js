@@ -5,6 +5,7 @@
 	$( document ).ready( function() {
 
 		var progress_bar = false;
+		$('.rh_login_form').slideDown(500);
 
 		var rhLoginMessageBox = $('.rh_login_modal_messages');
 		var rhLoginMessagesCommon = $('.rh_login_modal_messages .rh_modal__msg');
@@ -266,7 +267,7 @@
             $('.rh_password_reset_form').slideDown(500);
         });
 
-        var rhLoginViz = false;
+        var rhLoginViz = true;
         $('.rh_menu__user_profile, .rhea_menu__user_profile, .rh-user-account-profile-image .user-icon').on('click',function (e) {
             // e.preventDefault();
             $('.rh_login_modal_wrapper').css("display", "flex").hide().fadeIn(500);

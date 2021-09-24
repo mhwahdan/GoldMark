@@ -1,12 +1,12 @@
 from django.contrib.auth.hashers import make_password
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin, AbstractUser
-from django.utils.safestring import mark_safe
 from django.utils import timezone
 from django.core.mail import send_mail
 from django.contrib.auth.validators import UnicodeUsernameValidator
 from django.apps import apps
 from django.contrib import auth
+from propetyMarket.models import Property, Developer
 
 
 class UserManager(BaseUserManager):
@@ -82,8 +82,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(max_length=100, verbose_name="email address", unique=True)
     phone = models.CharField(max_length=11, verbose_name="primary phone number",
                              blank=True, null=True)
-    image = models.ImageField(upload_to='theBank/users/profile pictures/', verbose_name='Profile picture',
-                              blank=True, null=True)
+    image = models.ImageField(upload_to='theBank/media/users/profile pictures/', verbose_name='Profile picture',
+                              default='theBank/media/users/default.jpeg')
     date_joined = models.DateTimeField(verbose_name='date joined', default=timezone.now)
     USERNAME_FIELD = 'username'
     EMAIL_FIELD = 'email'
@@ -127,4 +127,27 @@ class User(AbstractBaseUser, PermissionsMixin):
         send_mail(subject, message, from_email, [self.email], **kwargs)
 
     username_validator = UnicodeUsernameValidator()
+
+
+class Client(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, verbose_name='the user object')
+
+    def get_favorites(self):
+        return self.favorite_set.all()
+
+
+class Favorite(models.Model):
+    property = models.ForeignKey(Property, on_delete=models.CASCADE, blank=True, null=True,
+                                 verbose_name='Property selected')
+    client = models.ForeignKey(Client, on_delete=models.CASCADE, blank=True, null=True,
+                               verbose_name='Client it belongs to')
+
+
+class Agent(models.Model):
+    Agency = models.ForeignKey(Developer, on_delete=models.CASCADE,
+                               blank=True, null=True, verbose_name='Agency the agent belongs to')
+    User = models.OneToOneField(User, on_delete=models.CASCADE, verbose_name='the user name')
+
+    def __str__(self):
+        return "Agent " + self.User.username
 

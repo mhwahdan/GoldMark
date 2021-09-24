@@ -1,7 +1,6 @@
 from django.db import models
 from django.utils import timezone
-from django.contrib.auth.models import User
-from django.conf import settings
+from theBank.settings import AUTH_USER_MODEL
 
 
 class Location(models.Model):
@@ -24,15 +23,6 @@ class Developer(models.Model):
 
     def __str__(self):
         return self.name
-
-
-class Agent(models.Model):
-    Agency = models.ForeignKey(Developer, on_delete=models.CASCADE,
-                               blank=True, null=True, verbose_name='Agency the agent belongs to')
-    User = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name='the user name')
-
-    def __str__(self):
-        return "Agent " + self.User.username
 
 
 class Property(models.Model):
@@ -69,21 +59,21 @@ class Property(models.Model):
                               verbose_name='profile image')
     garage = models.IntegerField(verbose_name='number of garage places', null=True, blank=True)
     propertyTypes = {
-                                ("town house", "town house"),
-                                ("apartment", "apartment"),
-                                ("villa", "villa"),
-                                ("twin house", "twin house"),
-                                ("chalet", "chalet"),
-                                ("duplex", "duplex"),
-                                ("pent house", "pent house"),
-                                ("serviced apartment", "serviced apartment"),
-                                ("studio", "studio"),
-                                ("office", "office"),
-                                ("restaurant", "restaurant"),
-                                ("retail", "retail"),
-                                ("Industrial", "Industrial"),
-                                ("clinic", "clinic")
-                            }
+        ("town house", "town house"),
+        ("apartment", "apartment"),
+        ("villa", "villa"),
+        ("twin house", "twin house"),
+        ("chalet", "chalet"),
+        ("duplex", "duplex"),
+        ("pent house", "pent house"),
+        ("serviced apartment", "serviced apartment"),
+        ("studio", "studio"),
+        ("office", "office"),
+        ("restaurant", "restaurant"),
+        ("retail", "retail"),
+        ("Industrial", "Industrial"),
+        ("clinic", "clinic")
+    }
     type = models.CharField(max_length=100, verbose_name='Property Type',
                             choices=propertyTypes)
     parent = models.ForeignKey('self', on_delete=models.SET_NULL, blank=True, null=True,
@@ -115,6 +105,9 @@ class Property(models.Model):
         if not self.is_compound():
             return {}
         return self.property_set.all()
+
+    def get_followers(self):
+        return self.client_set.all()
 
 
 class Comment(models.Model):
@@ -175,6 +168,5 @@ class Faq(models.Model):
 
     def __str__(self):
         return self.question
-
 
 
