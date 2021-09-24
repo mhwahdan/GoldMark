@@ -9,7 +9,6 @@ https://docs.theBank.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.theBank.com/en/3.2/ref/settings/
 """
-
 from pathlib import Path
 import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -25,10 +24,10 @@ SECRET_KEY = 'django-insecure-4k-nez^xh@am=-8b7%fb&om9461u(op4m(6eh53(rr1-03e9s)
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["147.182.226.148"]
-
+ALLOWED_HOSTS = ["147.182.226.148", "127.0.0.1"]
 
 # Application definition
+AUTH_USER_MODEL = 'users.User'
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -37,9 +36,18 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'GoldMark.apps.GoldMarkConfig',
+    'propetyMarket.apps.PropertyMarketConfig',
+    'Blog.apps.BlogConfig',
+    'users.apps.UsersConfig',
     'flat_json_widget',
-    'tinymce'
+    'tinymce',
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.github',
+    'allauth.socialaccount.providers.google',
+    'allauth.socialaccount.providers.facebook'
 ]
 
 MIDDLEWARE = [
@@ -73,7 +81,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'theBank.wsgi.application'
 
-
 # Database
 # https://docs.theBank.com/en/3.2/ref/settings/#databases
 
@@ -88,6 +95,11 @@ DATABASES = {
 # Password validation
 # https://docs.theBank.com/en/3.2/ref/settings/#auth-password-validators
 
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend'
+]
+
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -100,13 +112,12 @@ AUTH_PASSWORD_VALIDATORS = [
     },
     {
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
+    }
 ]
 
 
 # Internationalization
 # https://docs.theBank.com/en/3.2/topics/i18n/
-
 LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
@@ -117,14 +128,24 @@ USE_L10N = True
 
 USE_TZ = True
 
+ACCOUNT_EMAIL_VERIFICATION = 'none'
+
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
+
+SITE_ID = 1
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.theBank.com/en/3.2/howto/static-files/
 
+#STATIC_ROOT = BASE_DIR / 'static'
 STATIC_URL = '/static/'
 
-STATIC_ROOT= '/home/developer/theBank/GoldMark/static'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+STATICFILES_DIRS = [
+    BASE_DIR / 'static/'
+]
+
+MEDIA_ROOT = BASE_DIR / 'media'
 MEDIA_URL = '/media/'
 
 # Default primary key field type
@@ -142,9 +163,7 @@ TINYMCE_DEFAULT_CONFIG = {
 
     'custom_undo_redo_levels': 20,
 
-    'selector': 'textarea',
-
-    'theme': 'modern',
+    'theme': 'silver',
 
     'plugins': '''
 

@@ -1,0 +1,194 @@
+{% extends 'assets/base.html' %}
+{% load static %}
+{% block content %}
+
+<body class="page-template-default page page-id-3588 wp-embed-responsive rvr-is-enabled  design_modern inspiry_mod_header_variation_one inspiry_header_search_form_enabled inspiry_mod_search_form_default inspiry_body_floating_features_show inspiry_responsive_header_solid elementor-default elementor-kit-7">
+<div class="rh_wrap rh_wrap_stick_footer">    <div id="rh_progress"></div>
+
+		{% include 'assets/mobileheader.html' %}
+		{% include 'assets/desktopheader.html' %}
+
+	<section class="rh_banner rh_banner__image" style="background-image: url('./wp-content/themes/realhomes/assets/modern/images/banner.jpg');">
+		<div class="rh_banner__cover"></div>
+		<div class="rh_banner__wrap">
+			<h2 class="rh_banner__title">FAQs</h2>
+
+		</div>
+	</section>
+    {% include 'GoldMark/searchbar.html' %}
+    <!-- /.rh_prop_search -->
+
+    <section class="rh_section rh_section--flex rh_wrap--padding rh_wrap--topPadding">
+		        <div class="rh_page rh_page__listing_page rh_page__main">
+
+
+                <div class="rh_blog rh_blog__listing rh_blog__single">
+
+											                        <article id="post-3588" class="post-3588 page type-page status-publish hentry rh_blog__post entry-header-margin-fix">
+							                                <div class="entry-header blog-post-entry-header">
+									<h1 class="entry-title">FAQs</h1>                                </div>
+								                            <div class="rh_content entry-content">
+
+<div class="wp-block-quick-and-easy-faqs-faqs-filterable-accordion">            <div class="qae-faqs-container qae-faqs-toggle-container">
+							<ul class="qe-faqs-filters-container">
+				<li><a class="qe-faqs-filter" href="#" data-filter="*">All</a></li>
+                                 {% for category in categories %}
+				<li><a class="qe-faqs-filter" href="#{{ category.get_class_name }}" data-filter=".{{ category.get_class_name }}">{{ category.name }} FAQS</a></li>
+                            {% endfor %}</ul>
+{% for FAQ in FAQS %}
+					<div id="qaef-3553" class="qe-faq-toggle {{ FAQ.category.get_class_name }}">
+			<div class="qe-toggle-title">
+				<h4>
+					<i class="fa fa-minus-circle"></i>{{ FAQ.question }} ?</h4>
+			</div>
+			<div class="qe-toggle-content">
+                {{ FAQ.answer }}</div>
+    		            </div>
+{% endfor %}
+
+		</div>
+                            </div>
+
+                        </article>
+
+
+                </div>
+<!-- /.rh_blog rh_blog__listing -->
+
+
+        </div>
+<!-- /.rh_page rh_page__main -->
+
+		            <div class="rh_page rh_page__sidebar">
+				    <aside class="rh_sidebar">
+<section id="featured_properties_widget-2" class="widget clearfix Featured_Properties_Widget"><h3 class="title">Featured Properties</h3>
+{% for property in featured %}
+    <article class="rh_prop_card rh_prop_card--block">
+
+	<div class="rh_prop_card__wrap">
+
+					<div class="rh_label rh_label__featured_widget">
+				<div class="rh_label__wrap">
+					Featured					<span></span>
+				</div>
+			</div>
+			<!-- /.rh_label -->
+
+		<figure class="rh_prop_card__thumbnail">
+			<div class="rh_figure_property_one">
+                <a href="{% url 'properties' %}?id={{ property.id }}">
+					<img width="680" height="395" src="{{ property.image.url }}" class="attachment-modern-property-child-slider size-modern-property-child-slider wp-post-image" alt="House" loading="lazy">                </a>
+
+
+				<div class="rh_overlay"></div>
+				<div class="rh_overlay__contents rh_overlay__fadeIn-bottom">
+											<a href="{% url 'properties' %}?id={{ property.id }}">View Property</a>
+										</div>
+						</div>
+			<!-- /.rh_overlay__contents -->
+
+			<!-- /.rh_prop_card__btns -->
+		</figure>
+		<!-- /.rh_prop_card__thumbnail -->
+
+		<div class="rh_prop_card__details">
+
+			<h3>
+				<a href="{% url 'properties' %}?id={{ property.id }}">{{ property.name}}</a>
+			</h3>
+			<p class="rh_prop_card__excerpt">{{ property.description }}</p>
+			<!-- /.rh_prop_card__excerpt -->
+
+			<div class="rh_prop_card__meta_wrap">
+{% if property.bedrooms %}
+									<div class="rh_prop_card__meta">
+                                                    <span class="rh_meta_titles">
+                                                           Bedrooms                                                    </span>
+						<div>
+							<svg class="rh_svg" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24">
+ <defs>
+  </defs>
+  <path d="M1111.91,600.993h16.17a2.635,2.635,0,0,1,2.68,1.773l1.21,11.358a2.456,2.456,0,0,1-2.61,2.875h-18.73a2.46,2.46,0,0,1-2.61-2.875l1.21-11.358A2.635,2.635,0,0,1,1111.91,600.993Zm0.66-7.994h3.86c1.09,0,2.57.135,2.57,1l0.01,3.463c0.14,0.838-1.72,1.539-2.93,1.539h-4.17c-1.21,0-2.07-.7-1.92-1.539l0.37-3.139A2.146,2.146,0,0,1,1112.57,593Zm11,0h3.86a2.123,2.123,0,0,1,2.2,1.325l0.38,3.139c0.14,0.838-.72,1.539-1.93,1.539h-5.17c-1.21,0-2.07-.7-1.92-1.539L1121,594C1121,593.1,1122.48,593,1123.57,593Z" transform="translate(-1108 -593)"></path>
+</svg>
+							<span class="figure">{{ property.bedrooms }}</span>
+						</div>
+					</div>
+					<!-- /.rh_prop_card__meta -->
+{% endif %}
+            {% if property.bathrooms %}
+									<div class="rh_prop_card__meta">
+                                                    <span class="rh_meta_titles">
+                                                            Bathrooms                                                    </span>
+						<div>
+							<svg class="rh_svg" xmlns="http://www.w3.org/2000/svg" width="23.69" height="24" viewbox="0 0 23.69 24">
+  <path d="M1204,601a8,8,0,0,1,16,0v16h-2V601a6,6,0,0,0-12,0v1h-2v-1Zm7,6a6,6,0,0,0-12,0h12Zm-6,2a1,1,0,0,1,1,1v1a1,1,0,0,1-2,0v-1A1,1,0,0,1,1205,609Zm0,5a1,1,0,0,1,1,1v1a1,1,0,0,1-2,0v-1A1,1,0,0,1,1205,614Zm4.94-5.343a1,1,0,0,1,1.28.6l0.69,0.878a1,1,0,0,1-1.88.685l-0.69-.879A1,1,0,0,1,1209.94,608.657Zm2.05,4.638a1,1,0,0,1,1.28.6l0.35,0.94a1.008,1.008,0,0,1-.6,1.282,1,1,0,0,1-1.28-.6l-0.35-.939A1.008,1.008,0,0,1,1211.99,613.295Zm-11.93-4.638a1,1,0,0,1,.6,1.282l-0.69.879a1,1,0,1,1-1.87-.682l0.68-.88A1,1,0,0,1,1200.06,608.657Zm-2.05,4.639a1,1,0,0,1,.6,1.281l-0.34.941a1,1,0,0,1-1.88-.683l0.34-.94A1,1,0,0,1,1198.01,613.3Z" transform="translate(-1196.31 -593)"></path>
+</svg>
+							<span class="figure">{{ property.bathrooms }}</span>
+						</div>
+					</div>
+					<!-- /.rh_prop_card__meta -->
+{% endif %}
+
+									<div class="rh_prop_card__meta">
+                                                    <span class="rh_meta_titles">
+                                                             	Area                                                    </span>
+						<div>
+							<svg class="rh_svg" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="24px" height="24px" viewbox="0 0 24 24" enable-background="new 0 0 24 24" xml:space="preserve">
+<g>
+	<circle cx="2" cy="2" r="2"></circle>
+</g>
+<g>
+	<circle cx="2" cy="22" r="2"></circle>
+</g>
+<g>
+	<circle cx="22" cy="2" r="2"></circle>
+</g>
+<rect x="1" y="1" width="2" height="22"></rect>
+<rect x="1" y="1" width="22" height="2"></rect>
+<path opacity="0.5" d="M23,20.277V1h-2v19.277C20.7,20.452,20.452,20.7,20.277,21H1v2h19.277c0.347,0.596,0.984,1,1.723,1
+	c1.104,0,2-0.896,2-2C24,21.262,23.596,20.624,23,20.277z"></path>
+</svg>
+							<span class="figure">
+															{{ property.area }}														</span>
+															<span class="label">
+																sq meter															</span>
+													</div>
+					</div>
+					<!-- /.rh_prop_card__meta -->
+
+			</div>
+			<!-- /.rh_prop_card__meta_wrap -->
+
+			<div class="rh_prop_card__priceLabel rh_prop_card__priceLabel_box">
+				<div class="rh_rvr_price_status_box">
+											<span class="rh_prop_card__status">
+					{% if property.status %}
+                                                For Sale
+                                         {% else %}
+                                                For Rent
+                                                {% endif %}
+                                            </span>
+					<!-- /.rh_prop_card__type -->
+					<p class="rh_prop_card__price">
+                        {{ property.price }} EGP</p>
+					<!-- /.rh_prop_card__price -->
+				</div>
+
+							</div>
+			<!-- /.rh_prop_card__priceLabel -->
+
+		</div>
+		<!-- /.rh_prop_card__details -->
+
+	</div>
+	<!-- /.rh_prop_card__wrap -->
+
+</article>
+{% endfor %}
+					</section>    </aside>
+	            </div>
+<!-- /.rh_page rh_page__sidebar -->
+
+    </section><!-- /.rh_section rh_wrap rh_wrap--padding -->
+
+{% endblock %}

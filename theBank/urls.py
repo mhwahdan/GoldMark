@@ -21,8 +21,10 @@ from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('GoldMark.urls')),
-    path('tinymce/', include('tinymce.urls'))
+    path('', include('propetyMarket.urls')),
+    path('blogs/', include('Blog.urls')),
+    path('tinymce/', include('tinymce.urls')),
+    path('accounts/', include('allauth.urls'))
 ]
 
 if settings.DEBUG:
