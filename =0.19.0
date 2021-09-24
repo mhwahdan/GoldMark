@@ -1,0 +1,6 @@
+Collecting httplib2
+  Downloading httplib2-0.19.1-py3-none-any.whl (95 kB)
+Collecting pyparsing<3,>=2.4.2
+  Downloading pyparsing-2.4.7-py2.py3-none-any.whl (67 kB)
+Installing collected packages: pyparsing, httplib2
+Successfully installed httplib2-0.19.1 pyparsing-2.4.7
