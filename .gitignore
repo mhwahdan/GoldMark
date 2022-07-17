@@ -1,7 +1,5 @@
-/theBankenv/
 .idea
-/theBank/start.sh
-/udo systemctl status gunicorn
+**/migrations/*
 /db.sqlite3
 /db
 /dbd
