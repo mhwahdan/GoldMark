@@ -16,7 +16,6 @@ class RegisterForm(forms.ModelForm):
             'username',
             'phone',
             'image',
-            'username'
         ]
 
     def clean_email(self):
@@ -47,8 +46,7 @@ class USERAdminCreationForm(forms.ModelForm):
             'email',
             'username',
             'phone',
-            'image',
-            'username'
+            'image'
         ]
 
     def clean(self):

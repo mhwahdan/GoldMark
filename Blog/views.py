@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.core.paginator import Paginator
 from Blog.models import BlogCategory, Blog
-from propetyMarket.models import Property, Developer, Location
+from PropertyMarket.models import Property, Developer, Location
 # Create your views here.
 
 

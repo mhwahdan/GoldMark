@@ -350,36 +350,6 @@
     }
 
     /**
-     * Change Min and Max Price fields based on selected status for rent
-     */
-    if ( typeof localizedSearchParams.rent_slug !== "undefined" ) {
-
-        var property_status_changed = function( new_status ){
-            var price_for_others = $('.advance-search-form .price-for-others');
-            var price_for_rent = $('.advance-search-form .price-for-rent');
-            if( price_for_others.length > 0 && price_for_rent.length > 0){
-                if( new_status == localizedSearchParams.rent_slug ){
-                    price_for_others.addClass('hide-fields').find('select').prop('disabled', true);
-                    price_for_rent.removeClass('hide-fields').find('select').prop('disabled', false);
-                }else{
-                    price_for_rent.addClass('hide-fields').find('select').prop('disabled', true);
-                    price_for_others.removeClass('hide-fields').find('select').prop('disabled', false);
-                }
-            }
-        }
-        $('.advance-search-form #select-status').change(function(e){
-            var selected_status = $(this).val();
-            property_status_changed(selected_status);
-        });
-
-        /* On page load ( as on search page ) */
-        var selected_status = $('.advance-search-form #select-status').val();
-        if( selected_status == localizedSearchParams.rent_slug ){
-            property_status_changed(selected_status);
-        }
-    }
-
-    /**
      * Max and Min Price
      * Shows red outline if min price is bigger than max price
      */

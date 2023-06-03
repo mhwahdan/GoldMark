@@ -55,7 +55,7 @@ class UserAdmin(BaseUserAdmin):
                 'lastname',
                 'email',
                 'phone',
-                'image'
+                'image',
                 'password',
                 'confirm_password'
             ]

@@ -6,7 +6,7 @@ from django.core.mail import send_mail
 from django.contrib.auth.validators import UnicodeUsernameValidator
 from django.apps import apps
 from django.contrib import auth
-from propetyMarket.models import Property, Developer
+from PropertyMarket.models import Property, Developer
 
 
 class UserManager(BaseUserManager):

@@ -348,10 +348,6 @@
                                     </div>
                                 </div>
                                 {% endif %}
-                                <div class="rh_property__map_wrap">
-                                    <h4 class="rh_property__heading">Property on Map</h4>
-                                    <div id="property_map"></div>
-                                </div>
                                 <div class="rh_property__mc_wrap">
                                     <h4 class="rh_property__heading">Mortgage Calculator</h4>
                                     <div class="rh_property__mc clearfix">
@@ -835,8 +831,8 @@
                                             <p class="rh_widget_form__row">
                                                 <label for="message">Message</label>
                                                 <textarea required cols="40" rows="6" type="text" name="message"
-                                                    placeholder="Message" class="required"
-                                                    title="* Please provide your message">Hello, I am interested in [{{ unit.name }}]</textarea>
+                                                    placeholder="Message" 
+                                                    title="* Please provide your message">Hello, I am interested in {{ unit.name }}</textarea>
                                             </p>
                                             <!-- /.rh_widget_form__row -->
 
