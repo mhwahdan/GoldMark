@@ -43,7 +43,7 @@ certifi==2021.5.30
 cffi==1.14.6
 charset-normalizer==2.0.6
 constantly==15.1.0
-cryptography==3.4.8
+cryptography==41.0.0
 defusedxml==0.7.1
 Django==3.2.7
 django-flat-json-widget==0.1.3
